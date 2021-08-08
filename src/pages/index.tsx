@@ -1,59 +1,94 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import layout from "justified-layout";
+import { graphql } from "gatsby";
+import { getImage, GatsbyImage } from "gatsby-plugin-image";
+
+export const query = graphql`
+  query IndexPageQuery {
+    allFile(sort: { fields: fields___exif___exif___DateTimeOriginal }) {
+      nodes {
+        childImageSharp {
+          gatsbyImageData(
+            width: 800
+            placeholder: BLURRED
+            formats: [AUTO, WEBP, AVIF]
+          )
+        }
+        absolutePath
+        fields {
+          dimension {
+            height
+            width
+            aspectRatio
+          }
+        }
+      }
+    }
+  }
+`;
+
+type QueryResult = {
+  allFile: {
+    nodes: {
+      absolutePath: string;
+      childImageSharp: any;
+      fields: {
+        dimension: {
+          height: number;
+          width: number;
+          aspectRatio: number;
+        };
+      };
+    }[];
+  };
+};
 
 const containerWidth = 1080;
 
-const l = layout(
-  [
-    1.33, 1, 0.65, 1, 0.65, 1.33, 1.33, 1, 0.65, 1.33, 1, 0.65, 1.33, 1, 0.65,
-    1.33, 1, 0.65,
-  ],
-  {
-    boxSpacing: 0,
-    containerPadding: 0,
-    containerWidth,
-  }
-);
-const colours = ["red", "green", "blue"];
+const PhotoGrid = ({ photos }: { photos: QueryResult["allFile"]["nodes"] }) => {
+  const ll = layout(
+    photos.map((p) => p.fields.dimension.aspectRatio),
+    {
+      boxSpacing: 0,
+      containerPadding: 0,
+      containerWidth,
+    }
+  );
 
-console.debug("layout", l);
-
-const PhotoGrid = () => {
   return (
     <div
       style={{
         width: "100%",
-        backgroundColor: "grey",
         display: "flex",
         flexWrap: "wrap",
-        padding: "2.5px",
+        // padding: "2.5px",
       }}
     >
-      {l.boxes.map((b, i) => (
-        <div
-          style={{
-            flex: `0 0 ${(b.width / containerWidth) * 100}%`,
-            height: 80,
-            display: "inline-block",
-            padding: "2.5px",
-            boxSizing: "border-box",
-          }}
-        >
+      {React.Children.toArray(
+        ll.boxes.map((b, i) => (
           <div
             style={{
-              width: "100%",
-              height: "100%",
-              backgroundColor: colours[i % colours.length],
+              flex: `0 0 ${(b.width / containerWidth) * 100}%`,
+              display: "inline-block",
+              padding: "5px",
+              boxSizing: "border-box",
             }}
-          />
-        </div>
-      ))}
+          >
+            <GatsbyImage
+              image={getImage(photos[i] as any)}
+              alt="hehe"
+              style={{ height: "100%", width: "100%" }}
+            />
+          </div>
+        ))
+      )}
     </div>
   );
 };
 
-const IndexPage = () => {
-  return <PhotoGrid />;
+const IndexPage = ({ data }: { data: QueryResult }) => {
+  console.debug("data here", data);
+  return <PhotoGrid photos={data.allFile.nodes} />;
 };
 
 export default IndexPage;

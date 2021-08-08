@@ -15,10 +15,19 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
-    "@types/justified-layout": "^4.0.1",
+    "exif": "^0.6.0",
     "gatsby": "^3.10.2",
+    "gatsby-plugin-image": "^1.11.0",
+    "gatsby-plugin-sharp": "^3.11.0",
+    "gatsby-source-filesystem": "^3.11.0",
+    "gatsby-transformer-sharp": "^3.11.0",
+    "image-size": "^1.0.0",
     "justified-layout": "^4.1.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
+  },
+  "devDependencies": {
+    "@types/exif": "^0.6.3",
+    "@types/justified-layout": "^4.0.1"
   }
 }

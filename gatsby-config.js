@@ -3,5 +3,16 @@ module.exports = {
     siteUrl: "https://www.yourdomain.tld",
     title: "photo-portfolio",
   },
-  plugins: [],
+  plugins: [
+    `gatsby-plugin-image`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `photos`,
+        path: `${__dirname}/src/images/portfolio/`,
+      },
+    },
+  ],
 };
