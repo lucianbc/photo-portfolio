@@ -14,5 +14,6 @@ module.exports = {
         path: `${__dirname}/src/images/portfolio/`,
       },
     },
+    `gatsby-plugin-styled-components`,
   ],
 };

@@ -15,19 +15,23 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
+    "babel-plugin-styled-components": "^1.13.2",
     "exif": "^0.6.0",
     "gatsby": "^3.10.2",
     "gatsby-plugin-image": "^1.11.0",
     "gatsby-plugin-sharp": "^3.11.0",
+    "gatsby-plugin-styled-components": "^4.11.0",
     "gatsby-source-filesystem": "^3.11.0",
     "gatsby-transformer-sharp": "^3.11.0",
     "image-size": "^1.0.0",
     "justified-layout": "^4.1.0",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "styled-components": "^5.3.0"
   },
   "devDependencies": {
     "@types/exif": "^0.6.3",
-    "@types/justified-layout": "^4.0.1"
+    "@types/justified-layout": "^4.0.1",
+    "@types/styled-components": "^5.1.12"
   }
 }

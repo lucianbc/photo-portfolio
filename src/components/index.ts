@@ -1,1 +1,2 @@
-export * from "./PhotoGrid";
+// export * from "./PhotoGrid";
+export * from "./ResponsivePhotoGrid";
