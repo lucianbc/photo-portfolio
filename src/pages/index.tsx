@@ -1,11 +1,12 @@
 import React from "react";
-import layout from "justified-layout";
 import { graphql } from "gatsby";
-import { getImage, GatsbyImage } from "gatsby-plugin-image";
+import { PhotoGrid } from "../components";
 
 export const query = graphql`
   query IndexPageQuery {
-    allFile(sort: { fields: fields___exif___exif___DateTimeOriginal }) {
+    allFile(
+      sort: { fields: fields___exif___exif___DateTimeOriginal, order: [DESC] }
+    ) {
       nodes {
         childImageSharp {
           gatsbyImageData(
@@ -14,7 +15,7 @@ export const query = graphql`
             formats: [AUTO, WEBP, AVIF]
           )
         }
-        absolutePath
+        name
         fields {
           dimension {
             height
@@ -30,7 +31,7 @@ export const query = graphql`
 type QueryResult = {
   allFile: {
     nodes: {
-      absolutePath: string;
+      name: string;
       childImageSharp: any;
       fields: {
         dimension: {
@@ -43,51 +44,7 @@ type QueryResult = {
   };
 };
 
-const containerWidth = 1080;
-
-const PhotoGrid = ({ photos }: { photos: QueryResult["allFile"]["nodes"] }) => {
-  const ll = layout(
-    photos.map((p) => p.fields.dimension.aspectRatio),
-    {
-      boxSpacing: 0,
-      containerPadding: 0,
-      containerWidth,
-    }
-  );
-
-  return (
-    <div
-      style={{
-        width: "100%",
-        display: "flex",
-        flexWrap: "wrap",
-        // padding: "2.5px",
-      }}
-    >
-      {React.Children.toArray(
-        ll.boxes.map((b, i) => (
-          <div
-            style={{
-              flex: `0 0 ${(b.width / containerWidth) * 100}%`,
-              display: "inline-block",
-              padding: "5px",
-              boxSizing: "border-box",
-            }}
-          >
-            <GatsbyImage
-              image={getImage(photos[i] as any)}
-              alt="hehe"
-              style={{ height: "100%", width: "100%" }}
-            />
-          </div>
-        ))
-      )}
-    </div>
-  );
-};
-
 const IndexPage = ({ data }: { data: QueryResult }) => {
-  console.debug("data here", data);
   return <PhotoGrid photos={data.allFile.nodes} />;
 };
 
