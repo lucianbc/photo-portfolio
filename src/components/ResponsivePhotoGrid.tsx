@@ -112,6 +112,10 @@ const PhotoBox = styled.div<PhotoBoxProps>`
   display: inline-block;
   padding: 5px;
   box-sizing: border-box;
+  :hover {
+    opacity: 0.9;
+  }
+  transition: all 0.2s;
 `;
 
 const GridContainer = styled.div`
