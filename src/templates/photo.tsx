@@ -3,6 +3,7 @@ import { graphql, Link } from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image";
 import { getImage } from "gatsby-plugin-image";
 import "../styles/fullHeightPage.css";
+import styled from "styled-components";
 
 export const query = graphql`
   query loadPhoto($photoId: String!) {
@@ -11,7 +12,7 @@ export const query = graphql`
       childImageSharp {
         gatsbyImageData(
           width: 1300
-          placeholder: BLURRED
+          placeholder: NONE
           formats: [AUTO, WEBP, AVIF]
         )
       }
@@ -31,20 +32,9 @@ const PhotoPage = ({ data }) => {
           zIndex: 99,
         }}
       >
-        <Link to="/">
-          <span
-            style={{
-              padding: "20px",
-              boxSizing: "border-box",
-              display: "inline-block",
-              cursor: "pointer",
-              marginRight: "20px",
-              fontSize: 20,
-            }}
-          >
-            X
-          </span>
-        </Link>
+        <PlainLink to="/">
+          <XSpan>&#x2A09;</XSpan>
+        </PlainLink>
       </nav>
       <div
         style={{
@@ -65,5 +55,23 @@ const PhotoPage = ({ data }) => {
     </>
   );
 };
+
+const XSpan = styled.span`
+  padding: 20px;
+  box-sizing: border-box;
+  display: inline-block;
+  cursor: pointer;
+  margin-right: 20px;
+  font-size: 1.5rem;
+`;
+
+const PlainLink = styled(Link)`
+  :link,
+  :visited,
+  :hover,
+  :active {
+    color: black;
+  }
+`;
 
 export default PhotoPage;

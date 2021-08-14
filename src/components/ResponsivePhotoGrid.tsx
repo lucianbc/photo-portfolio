@@ -57,7 +57,7 @@ export const PhotoGrid = ({ photos }: Props) => {
   }));
 
   return (
-    <div style={{ width: "100%", maxWidth: "2100px", margin: "auto" }}>
+    <GridContainer>
       <div
         style={{
           width: "100%",
@@ -86,7 +86,7 @@ export const PhotoGrid = ({ photos }: Props) => {
           ))
         )}
       </div>
-    </div>
+    </GridContainer>
   );
 };
 
@@ -110,6 +110,13 @@ const PhotoBox = styled.div<PhotoBoxProps>`
     return s;
   }}
   display: inline-block;
-  padding: 2.5px;
+  padding: 5px;
+  box-sizing: border-box;
+`;
+
+const GridContainer = styled.div`
+  width: 95%;
+  max-width: 2100px;
+  margin: auto;
   box-sizing: border-box;
 `;
