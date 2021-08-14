@@ -16,6 +16,7 @@ export const query = graphql`
           )
         }
         name
+        id
         fields {
           dimension {
             height
@@ -32,6 +33,7 @@ type QueryResult = {
   allFile: {
     nodes: {
       name: string;
+      id: string;
       childImageSharp: any;
       fields: {
         dimension: {

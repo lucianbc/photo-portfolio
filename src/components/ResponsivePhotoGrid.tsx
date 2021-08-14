@@ -2,10 +2,12 @@ import React from "react";
 import layout from "justified-layout";
 import { getImage, GatsbyImage } from "gatsby-plugin-image";
 import styled from "styled-components";
+import { Link } from "gatsby";
 
 type Props = {
   photos: {
     name: string;
+    id: string;
     fields: {
       dimension: {
         aspectRatio: number;
@@ -73,11 +75,13 @@ export const PhotoGrid = ({ photos }: Props) => {
                   100,
               }))}
             >
-              <GatsbyImage
-                image={getImage(photo as any)}
-                alt={photo.name}
-                style={{ height: "100%", width: "100%" }}
-              />
+              <Link to={`/photos/${photo.id}`}>
+                <GatsbyImage
+                  image={getImage(photo as any)}
+                  alt={photo.name}
+                  style={{ height: "100%", width: "100%" }}
+                />
+              </Link>
             </PhotoBox>
           ))
         )}
