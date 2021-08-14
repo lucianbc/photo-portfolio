@@ -1,6 +1,7 @@
 import React from "react";
 import { graphql } from "gatsby";
 import { PhotoGrid } from "../components";
+import "@fontsource/montserrat";
 
 export const query = graphql`
   query IndexPageQuery {
@@ -46,8 +47,29 @@ type QueryResult = {
   };
 };
 
+const Header = () => {
+  return (
+    <header
+      style={{
+        width: "95%",
+        margin: "20px auto",
+        display: "flex",
+        fontFamily: "Montserrat",
+        cursor: "default",
+      }}
+    >
+      <h1>Lucian Boaca | Photo</h1>
+    </header>
+  );
+};
+
 const IndexPage = ({ data }: { data: QueryResult }) => {
-  return <PhotoGrid photos={data.allFile.nodes} />;
+  return (
+    <>
+      <Header />
+      <PhotoGrid photos={data.allFile.nodes} />
+    </>
+  );
 };
 
 export default IndexPage;
