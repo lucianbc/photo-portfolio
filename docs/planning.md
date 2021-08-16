@@ -4,7 +4,7 @@
 
 - [x] Display all photos on the index page
 - [x] Render a page for each photo and link to it
-- [ ] Deploy to netlify
+- [x] Deploy to netlify
 - [ ] Pick some good photos for the index page
 - [ ] Add collections section
 - [ ] Improve SEO and meta
