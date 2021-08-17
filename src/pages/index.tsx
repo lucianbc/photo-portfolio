@@ -56,6 +56,7 @@ const Header = () => {
         display: "flex",
         fontFamily: "Montserrat",
         cursor: "default",
+        paddingLeft: "5px",
       }}
     >
       <h1>Lucian Boaca | Photo</h1>
