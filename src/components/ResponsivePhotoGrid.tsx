@@ -68,7 +68,7 @@ export const PhotoGrid = ({ photos }: Props) => {
         {React.Children.toArray(
           photos.map((photo, index) => (
             <PhotoBox
-              responsiveRatios={layouts.map((l, li) => ({
+              responsiveRatios={layouts.map((l) => ({
                 breakpoint: l.breakPoint.mediaQuery,
                 ratio:
                   (l.layout.boxes[index].width / l.breakPoint.containerWidth) *
