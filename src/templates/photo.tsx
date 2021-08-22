@@ -4,6 +4,7 @@ import { GatsbyImage } from "gatsby-plugin-image";
 import { getImage } from "gatsby-plugin-image";
 import "../styles/fullHeightPage.css";
 import styled from "styled-components";
+import { Footer } from "../components";
 
 export const query = graphql`
   query loadPhoto($photoId: String!) {
@@ -52,6 +53,7 @@ const PhotoPage = ({ data }) => {
           imgStyle={{ objectFit: "contain" }}
         />
       </div>
+      <Footer />
     </>
   );
 };

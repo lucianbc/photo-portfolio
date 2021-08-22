@@ -1,6 +1,6 @@
 import React from "react";
 import { graphql } from "gatsby";
-import { PhotoGrid } from "../components";
+import { Footer, PhotoGrid } from "../components";
 import "@fontsource/montserrat";
 
 export const query = graphql`
@@ -69,6 +69,7 @@ const IndexPage = ({ data }: { data: QueryResult }) => {
     <>
       <Header />
       <PhotoGrid photos={data.allFile.nodes} />
+      <Footer />
     </>
   );
 };
