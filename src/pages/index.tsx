@@ -1,6 +1,7 @@
 import React from "react";
 import { graphql } from "gatsby";
 import { PhotoGrid } from "../components";
+import { Router } from "@reach/router";
 import "@fontsource/montserrat";
 
 export const query = graphql`
@@ -64,11 +65,23 @@ const Header = () => {
   );
 };
 
+const PhotoPreviewComponent = (props) => {
+  console.debug("props of photo component", props);
+  return (
+    <div>
+      <p>Photo here</p>
+    </div>
+  );
+};
+
 const IndexPage = ({ data }: { data: QueryResult }) => {
   return (
     <>
       <Header />
-      <PhotoGrid photos={data.allFile.nodes} />
+      <Router basepath="/">
+        <PhotoPreviewComponent path="/photo-preview" />
+        <PhotoGrid photos={data.allFile.nodes} path="/" />
+      </Router>
     </>
   );
 };
