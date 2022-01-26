@@ -83,7 +83,7 @@ const Hero: React.FC<{ data: any }> = ({ data }) => {
         }}
       >
         <h1>Lucian Boaca | Photography</h1>
-        <HeaderLinks>
+        <HeroLinks>
           <li>
             <Link to="/blog">Blog</Link>
           </li>
@@ -93,13 +93,13 @@ const Hero: React.FC<{ data: any }> = ({ data }) => {
           <li>
             <Link to="/about">About</Link>
           </li>
-        </HeaderLinks>
+        </HeroLinks>
       </div>
     </section>
   );
 };
 
-const HeaderLinks = styled.ul`
+const HeroLinks = styled.ul`
   display: flex;
   padding: 0;
   > li {
