@@ -1,0 +1,37 @@
+html {
+  font-family: "Source Sans Pro", sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  font-family: Montserrat, sans-serif;
+}
+
+h1 {
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+button,
+a {
+  font-family: Montserrat, sans-serif;
+}
+
+h1 + ul {
+  font-size: 1.3rem;
+}
+
+.content-font-size {
+  font-size: 1.125rem;
+}
+
+.container-sm {
+  width: 70%;
+  max-width: 700px;
+  margin: auto;
+}
+
+.text-center {
+  text-align: center;
+}

@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@fontsource/montserrat": "^4.5.1",
+    "@fontsource/source-sans-pro": "^4.5.1",
     "babel-plugin-styled-components": "^1.13.2",
     "exif": "^0.6.0",
     "gatsby": "^4.5.5",
@@ -24,6 +25,7 @@
     "gatsby-plugin-styled-components": "^5.5.0",
     "gatsby-source-filesystem": "^4.5.2",
     "gatsby-transformer-sharp": "^4.5.0",
+    "gbimage-bridge": "^0.2.1",
     "image-size": "^1.0.0",
     "justified-layout": "^4.1.0",
     "react": "^17.0.1",
