@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { graphql, Link } from "gatsby";
 import { Footer, PhotoGrid } from "../components";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
@@ -59,6 +59,44 @@ type QueryResult = {
   heroPhoto: {
     childImageSharp: ChildImageSharp;
   };
+};
+
+const Header = () => {
+  const [mobileToggleState, setState] = useState<
+    "active" | "inactive" | undefined
+  >();
+  return (
+    <header className="container-lg">
+      <Link to="/">Lucian Boaca | Photography</Link>
+
+      <span
+        className={`mobile-nav-toggle ${mobileToggleState}`}
+        onClick={() => {
+          const nextState =
+            mobileToggleState === undefined || mobileToggleState === "inactive"
+              ? "active"
+              : "inactive";
+          setState(nextState);
+        }}
+      >
+        <span className="one" />
+        <span className="two" />
+        <span className="three" />
+      </span>
+
+      <ul className={mobileToggleState === "active" ? "active" : ""}>
+        <li>
+          <Link to="/blog">Blog</Link>
+        </li>
+        <li>
+          <Link to="/feed">Feed</Link>
+        </li>
+        <li>
+          <Link to="/about">About</Link>
+        </li>
+      </ul>
+    </header>
+  );
 };
 
 const Hero: React.FC<{ data: any }> = ({ data }) => {
@@ -162,6 +200,7 @@ const WhoAmI = () => {
 const IndexPage = ({ data }: { data: QueryResult }) => {
   return (
     <>
+      <Header />
       <Hero data={data.heroPhoto} />
       <WhoAmI />
       <section style={{ paddingTop: "0px" }}>
