@@ -1,0 +1,7 @@
+.scrollHeader {
+  top: -50px;
+  transition: top 0.3s;
+  &.show {
+    top: 0;
+  }
+}

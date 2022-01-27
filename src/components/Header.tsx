@@ -2,12 +2,12 @@ import React from "react";
 import { Link } from "gatsby";
 import { useState } from "react";
 
-const Header = () => {
+export const Header = () => {
   const [mobileToggleState, setState] = useState<
     "active" | "inactive" | undefined
   >();
   return (
-    <nav>
+    <nav className="surface">
       <header className="container-lg">
         <Link to="/">Lucian Boaca | Photography</Link>
 
@@ -42,5 +42,3 @@ const Header = () => {
     </nav>
   );
 };
-
-export default Header;

@@ -40,6 +40,10 @@ h1 {
   text-align: center;
 }
 
+.surface {
+  background-color: white;
+}
+
 $mobileToggleAnimSpeed: 0.35s;
 
 header {
@@ -51,7 +55,6 @@ header {
   align-items: center;
   text-align: center;
   font-size: 1.1rem;
-
   > * {
     margin: 0 20px;
     &:first-child {

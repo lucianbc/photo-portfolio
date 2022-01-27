@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { graphql, Link } from "gatsby";
-import { Footer, PhotoGrid } from "../components";
+import { Footer, PhotoGrid, ScrollHeader } from "../components";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import styled from "styled-components";
-import Header from "../components/Header";
 
 export const query = graphql`
   query IndexPageQuery {
@@ -163,7 +162,7 @@ const WhoAmI = () => {
 const IndexPage = ({ data }: { data: QueryResult }) => {
   return (
     <>
-      <Header />
+      <ScrollHeader />
       <Hero data={data.heroPhoto} />
       <WhoAmI />
       <section style={{ paddingTop: "0px" }}>
