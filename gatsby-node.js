@@ -2,10 +2,39 @@ const ExifImage = require("exif").ExifImage;
 const util = require("util");
 const sizeOf = require("image-size");
 const path = require("path");
+const { createFilePath } = require(`gatsby-source-filesystem`);
 
-async function onCreateNode({ node, actions: { createNodeField } }) {
-  if (node.internal.mediaType !== "image/jpeg") return;
+async function onCreateNode(params) {
+  const { node } = params;
+  if (node.internal.mediaType === "image/jpeg") {
+    enhanceImageNode(params);
+  }
+  if (node.internal.type === "MarkdownRemark") {
+    enhanceMarkdownPost(params);
+  }
+}
 
+async function createPages({ graphql, actions }) {
+  const { createPage } = actions;
+  await createPhotoPages(createPage, graphql);
+  await createBlogPages(createPage, graphql);
+}
+
+async function enhanceMarkdownPost({
+  node,
+  getNode,
+  actions: { createNodeField },
+}) {
+  const slug = createFilePath({ node, getNode, basePath: `pages` });
+
+  createNodeField({
+    node,
+    name: `slug`,
+    value: slug,
+  });
+}
+
+async function enhanceImageNode({ node, actions: { createNodeField } }) {
   const x = await readExif(node.absolutePath);
   const size = await util.promisify(sizeOf)(node.absolutePath);
 
@@ -24,8 +53,7 @@ async function onCreateNode({ node, actions: { createNodeField } }) {
   });
 }
 
-async function createPages({ graphql, actions }) {
-  const { createPage } = actions;
+async function createPhotoPages(createPage, graphql) {
   const photoPageTemplate = path.resolve(`src/templates/photo.tsx`);
   const photosQuery = `
     query loadPhotosForPages {
@@ -52,6 +80,33 @@ async function createPages({ graphql, actions }) {
       component: photoPageTemplate,
       context: {
         photoId: node.id,
+      },
+    });
+  });
+}
+
+async function createBlogPages(createPage, graphql) {
+  const query = `
+    query BlogPosts {
+      allMarkdownRemark {
+        nodes {
+          timeToRead
+          fields {
+            slug
+          }
+        }
+      }
+    }
+  `;
+
+  const result = await graphql(query);
+
+  result.data.allMarkdownRemark.nodes.forEach((node) => {
+    createPage({
+      path: node.fields.slug,
+      component: path.resolve("./src/templates/blog.tsx"),
+      context: {
+        slug: node.fields.slug,
       },
     });
   });

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { graphql, Link } from "gatsby";
 import { Footer, PhotoGrid, ScrollHeader } from "../components";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
@@ -7,6 +7,7 @@ import styled from "styled-components";
 export const query = graphql`
   query IndexPageQuery {
     allFile(
+      filter: { sourceInstanceName: { eq: "photos" } }
       sort: { fields: fields___exif___exif___DateTimeOriginal, order: [DESC] }
     ) {
       nodes {
@@ -82,7 +83,7 @@ const Hero: React.FC<{ data: any }> = ({ data }) => {
           backgroundColor: "rgba(0, 0, 0, 0.2)",
         }}
       >
-        <h1>Lucian Boaca | Photography</h1>
+        <h1 style={{ textAlign: "center" }}>Lucian Boaca | Photography</h1>
         <HeroLinks>
           <li>
             <Link to="/blog">Blog</Link>
