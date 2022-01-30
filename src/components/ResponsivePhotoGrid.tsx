@@ -119,8 +119,5 @@ const PhotoBox = styled.div<PhotoBoxProps>`
 `;
 
 const GridContainer = styled.div`
-  width: 95%;
-  max-width: 2100px;
-  margin: auto;
-  box-sizing: border-box;
+  margin: -5px;
 `;

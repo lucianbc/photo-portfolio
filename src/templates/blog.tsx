@@ -1,27 +1,134 @@
 import React from "react";
 import { graphql } from "gatsby";
+import { Header, PhotoGrid } from "../components";
+import rehypeReact from "rehype-react";
 import "./blog.scss";
-import { Header } from "../components";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 export const query = graphql`
   query BlogQuery($slug: String!) {
     markdownRemark(fields: { slug: { eq: $slug } }) {
       html
+      htmlAst
       frontmatter {
         title
         date
+      }
+      fields {
+        photos {
+          name {
+            name
+            id
+            childImageSharp {
+              gatsbyImageData(
+                width: 800
+                placeholder: BLURRED
+                formats: [AUTO, WEBP, AVIF]
+              )
+            }
+            fields {
+              dimension {
+                height
+                width
+                aspectRatio
+              }
+            }
+          }
+        }
       }
     }
   }
 `;
 
-const BlogPage = ({ data }) => {
+type Data = {
+  markdownRemark: {
+    html: string;
+    htmlAst: any;
+    frontmatter: {
+      title: string;
+      date: string;
+    };
+    fields: {
+      photos: {
+        name: {
+          name: string;
+          id: string;
+          childImageSharp: {
+            gatsbyImageData: any;
+          };
+          fields: {
+            dimension: {
+              height: number;
+              width: number;
+              aspectRatio: number;
+            };
+          };
+        };
+      }[];
+    };
+  };
+};
+
+const PhotoGridAdapter = (pageData: Data) => (props: any) => {
+  const photoNames = props.children.flatMap((child) => {
+    if (
+      typeof child === "object" &&
+      child?.props?.children &&
+      child?.props?.children[0] &&
+      typeof child?.props?.children[0] === "string"
+    ) {
+      return child.props.children[0];
+    }
+    return [];
+  });
+
+  const photos = photoNames.flatMap((name) => {
+    const photoItem = findPhoto(name, pageData);
+    if (photoItem) return [photoItem.name];
+    return [];
+  });
+
+  return <PhotoGrid photos={photos} />;
+};
+
+const findPhoto = (name: string, pageData: Data) => {
+  return pageData.markdownRemark.fields.photos.find(
+    (p) => p.name.name === name
+  );
+};
+
+const PhotoAdapter = (pageData: Data) => (props: any) => {
+  const photoName = props.children[0];
+  const photoObject = findPhoto(photoName, pageData);
+
+  if (!photoObject) {
+    return null;
+  }
+
+  const image = getImage(photoObject.name.childImageSharp.gatsbyImageData);
+
+  return <GatsbyImage image={image} alt="none" />;
+};
+
+const useRenderAst = (pageData: Data) => {
+  const renderAST = new rehypeReact({
+    createElement: React.createElement,
+    components: {
+      ["photo-grid" as any]: PhotoGridAdapter(pageData),
+      ["photo" as any]: PhotoAdapter(pageData),
+    },
+  }).Compiler;
+  return renderAST;
+};
+
+const BlogPage = ({ data }: { data: Data }) => {
+  const renderAST = useRenderAst(data);
   return (
     <>
       <Header />
       <div className="container-sm">
         <h1>{data.markdownRemark.frontmatter.title}</h1>
-        <div dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }} />
+        <div>{renderAST(data.markdownRemark.htmlAst)}</div>
       </div>
     </>
   );
