@@ -13,6 +13,15 @@ export const query = graphql`
       frontmatter {
         title
         date
+        banner {
+          childImageSharp {
+            gatsbyImageData(
+              width: 1800
+              placeholder: DOMINANT_COLOR
+              formats: [AUTO, WEBP, AVIF]
+            )
+          }
+        }
       }
       fields {
         photos {
@@ -47,6 +56,11 @@ type Data = {
     frontmatter: {
       title: string;
       date: string;
+      banner: {
+        childImageSharp: {
+          gatsbyImageData: any;
+        };
+      } | null;
     };
     fields: {
       photos: {
@@ -121,13 +135,37 @@ const useRenderAst = (pageData: Data) => {
   return renderAST;
 };
 
+const Banner = ({ data }: { data: Data }) => {
+  if (!data.markdownRemark.frontmatter.banner) {
+    return null;
+  }
+
+  const image = getImage(
+    data.markdownRemark.frontmatter.banner.childImageSharp.gatsbyImageData
+  );
+  return (
+    <div className="banner">
+      <GatsbyImage
+        image={image}
+        alt="banner"
+        objectFit="cover"
+        style={{ width: "100%", height: "100%" }}
+      />
+      <div className="content">
+        <h1>{data.markdownRemark.frontmatter.title}</h1>
+        <p>Posted on {data.markdownRemark.frontmatter.date}</p>
+      </div>
+    </div>
+  );
+};
+
 const BlogPage = ({ data }: { data: Data }) => {
   const renderAST = useRenderAst(data);
   return (
     <>
       <Header />
+      <Banner data={data} />
       <div className="container-sm">
-        <h1>{data.markdownRemark.frontmatter.title}</h1>
         <div>{renderAST(data.markdownRemark.htmlAst)}</div>
       </div>
     </>

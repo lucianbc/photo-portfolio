@@ -2,6 +2,7 @@
 author: Lucian Boaca
 date: 28-01-2022
 title: Berlin Part 1
+banner: DSCF1130-2
 ---
 
 <photo>DSCF1130-2</photo>

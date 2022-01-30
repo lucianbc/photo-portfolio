@@ -25,9 +25,7 @@ async function enhanceMarkdownPost(params) {
   const {
     node,
     getNode,
-    createNodeId,
-    createContentDigest,
-    actions: { createNodeField, createNode },
+    actions: { createNodeField },
   } = params;
   const slug = createFilePath({ node, getNode, basePath: `pages` });
   const rawMarkdown = node.internal.content;
@@ -56,6 +54,9 @@ const createSchemaCustomization = (params) => {
   const typeDefs = `
     type MarkdownRemarkFieldsPhotos implements Node {
       name: File @link(by: "name")
+    }
+    type MarkdownRemarkFrontmatter implements Node {
+      banner: File @link(by: "name")
     }
   `;
 
