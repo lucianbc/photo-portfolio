@@ -38,7 +38,9 @@
   "devDependencies": {
     "@netlify/plugin-gatsby": "^1.0.3",
     "@types/exif": "^0.6.3",
+    "@types/jest": "^27.4.0",
     "@types/justified-layout": "^4.0.1",
-    "@types/styled-components": "^5.1.12"
+    "@types/styled-components": "^5.1.12",
+    "jest": "^27.4.7"
   }
 }

@@ -4,14 +4,24 @@ date: 28-01-2022
 title: Berlin Part 1
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nisl odio, mattis a lorem malesuada, dictum dignissim ante. Nulla id lacinia ante, et convallis magna. Phasellus auctor purus quis diam convallis, et pulvinar metus sodales. Nulla facilisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus non consequat ante. Donec a metus lacinia, pretium nunc vel, bibendum nisl. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris purus tellus, pulvinar non elementum nec, sagittis quis sem. Sed quis elementum nisi. Integer rutrum sapien vel lectus volutpat, a consequat risus efficitur. Sed eleifend sit amet eros sit amet dapibus. Aliquam in diam non nunc consectetur consectetur id luctus ipsum. Donec at rhoncus urna.
+<photo>DSCF1130-2</photo>
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nisl
 
 ## Hey hey hey
 
-Morbi laoreet turpis eu augue luctus blandit. Duis gravida odio ut magna vestibulum, in finibus dui varius. Suspendisse dignissim eleifend porta. Sed rutrum elit sit amet faucibus molestie. Sed non eros nec lectus pretium lobortis. Donec molestie tellus neque, vel dapibus mauris dignissim non. Donec fermentum varius purus, at iaculis nunc molestie ut.
+Morbi laoreet turpis eu augue luctus blandit. Duis gravida odio ut magna
 
-Morbi consequat lorem id neque mollis ullamcorper. Sed enim diam, pulvinar quis lacinia sodales, bibendum non purus. Pellentesque sollicitudin dictum mi, vel interdum est hendrerit sed. Pellentesque risus est, tincidunt in risus aliquam, auctor feugiat lorem. Nullam ipsum magna, lacinia et lobortis non, condimentum id nisl. Nullam ac sollicitudin nisi, rutrum viverra nisl. Ut dignissim odio fermentum, varius mi id, tempor lectus. Maecenas ut suscipit felis. Morbi aliquam nulla at aliquet iaculis. Curabitur at arcu egestas lectus sollicitudin elementum.
+<photo>DSCF4647-2</photo>
+
+Morbi consequat lorem id neque mollis ullamcorper. Sed enim diam, pulvinar quis lacinia sodales, bibendum non purus. Pellentesque
 
 ## That's what I say
 
-Vestibulum augue libero, porttitor in iaculis a, elementum at mauris. Aliquam sollicitudin congue pharetra. Suspendisse eget mauris nec eros facilisis venenatis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed eget luctus nisl, non dictum lectus. Nulla at mollis sapien. Phasellus arcu orci, posuere et nunc sed, tristique feugiat nisi.
+Vestibulum augue libero, porttitor in iaculis a, elementum at mauris. at mollis sapien. Phasellus arcu orci, posuere et nunc sed, tristique feugiat nisi.
+
+<photo-grid>
+  <photo>DSCF4647-2</photo>
+  <photo>DSCF4647-2</photo>
+  <photo>DSCF4647-2</photo>
+</photo-grid>

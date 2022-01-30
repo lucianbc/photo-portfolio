@@ -3,6 +3,7 @@ const util = require("util");
 const sizeOf = require("image-size");
 const path = require("path");
 const { createFilePath } = require(`gatsby-source-filesystem`);
+const { extractAllPhotoNamesRegex } = require("./utils/extractImages");
 
 async function onCreateNode(params) {
   const { node } = params;
@@ -20,19 +21,65 @@ async function createPages({ graphql, actions }) {
   await createBlogPages(createPage, graphql);
 }
 
-async function enhanceMarkdownPost({
-  node,
-  getNode,
-  actions: { createNodeField },
-}) {
+async function enhanceMarkdownPost(params) {
+  const {
+    node,
+    getNode,
+    createNodeId,
+    createContentDigest,
+    actions: { createNodeField, createNode },
+  } = params;
   const slug = createFilePath({ node, getNode, basePath: `pages` });
+
+  // console.debug("in enhance md post params", params);
+
+  const rawMarkdown = node.internal.content;
+
+  const photos = extractAllPhotoNamesRegex(rawMarkdown);
+
+  // console.debug("Node here", JSON.stringify(node));
+
+  const photoNameToNode = (photoName) => {
+    const n = createNode({
+      photoName,
+      id: createNodeId(photoName),
+      internal: {
+        type: "Photo",
+        contentDigest: createContentDigest(photoName),
+      },
+    });
+    return n;
+  };
 
   createNodeField({
     node,
     name: `slug`,
     value: slug,
   });
+
+  createNodeField({
+    node,
+    name: `photos`,
+    value: photos.map((name) => ({
+      name,
+    })),
+  });
 }
+
+const createSchemaCustomization = (params) => {
+  console.debug("params in csc", params);
+  const {
+    actions: { createTypes },
+  } = params;
+
+  const typeDefs = `
+    type MarkdownRemarkFieldsPhotos implements Node {
+      name: File @link(by: "name")
+    }
+  `;
+
+  createTypes(typeDefs);
+};
 
 async function enhanceImageNode({ node, actions: { createNodeField } }) {
   const x = await readExif(node.absolutePath);
@@ -90,6 +137,7 @@ async function createBlogPages(createPage, graphql) {
     query BlogPosts {
       allMarkdownRemark {
         nodes {
+          htmlAst
           timeToRead
           fields {
             slug
@@ -101,7 +149,11 @@ async function createBlogPages(createPage, graphql) {
 
   const result = await graphql(query);
 
-  result.data.allMarkdownRemark.nodes.forEach((node) => {
+  const blogPostData = result.data.allMarkdownRemark.nodes;
+
+  blogPostData.forEach((node) => {
+    // const photos = runExtractAllPhotoNames(node.htmlAst);
+    // console.debug("photos here", photos);
     createPage({
       path: node.fields.slug,
       component: path.resolve("./src/templates/blog.tsx"),
@@ -124,3 +176,4 @@ const readExif = (path) =>
 
 exports.onCreateNode = onCreateNode;
 exports.createPages = createPages;
+exports.createSchemaCustomization = createSchemaCustomization;
