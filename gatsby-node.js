@@ -30,26 +30,8 @@ async function enhanceMarkdownPost(params) {
     actions: { createNodeField, createNode },
   } = params;
   const slug = createFilePath({ node, getNode, basePath: `pages` });
-
-  // console.debug("in enhance md post params", params);
-
   const rawMarkdown = node.internal.content;
-
   const photos = extractAllPhotoNamesRegex(rawMarkdown);
-
-  // console.debug("Node here", JSON.stringify(node));
-
-  const photoNameToNode = (photoName) => {
-    const n = createNode({
-      photoName,
-      id: createNodeId(photoName),
-      internal: {
-        type: "Photo",
-        contentDigest: createContentDigest(photoName),
-      },
-    });
-    return n;
-  };
 
   createNodeField({
     node,
@@ -67,7 +49,6 @@ async function enhanceMarkdownPost(params) {
 }
 
 const createSchemaCustomization = (params) => {
-  console.debug("params in csc", params);
   const {
     actions: { createTypes },
   } = params;
