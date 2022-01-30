@@ -10,7 +10,19 @@ module.exports = {
     {
       resolve: `gatsby-transformer-remark`,
       options: {
-        plugins: [`gatsby-remark-component-parent2div`],
+        plugins: [
+          `gatsby-remark-component-parent2div`,
+          {
+            resolve: `gatsby-remark-classes`,
+            options: {
+              classMap: {
+                "heading[depth=1]": "container-sm",
+                "heading[depth=2]": "container-sm",
+                paragraph: "container-sm",
+              },
+            },
+          },
+        ],
       },
     },
     {

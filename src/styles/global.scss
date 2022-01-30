@@ -23,16 +23,25 @@ h1 {
   font-size: 1.125rem;
 }
 
+.container-md {
+  width: 80%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .container-sm {
   width: 70%;
-  max-width: 700px;
-  margin: auto;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .container-lg {
   width: 90%;
   max-width: 1800px;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .text-center {

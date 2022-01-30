@@ -166,7 +166,7 @@ const IndexPage = ({ data }: { data: QueryResult }) => {
       <ScrollHeader />
       <Hero data={data.heroPhoto} />
       <WhoAmI />
-      <section style={{ paddingTop: "0px" }}>
+      <section style={{ paddingTop: "0px" }} className="container-lg">
         <PhotoGrid photos={data.allFile.nodes.slice(0, 6)} />
       </section>
       <Footer />
