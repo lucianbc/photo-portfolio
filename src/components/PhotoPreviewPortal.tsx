@@ -143,6 +143,7 @@ export const ImageWithPreview: React.FC<ImageWithPreviewProps> = ({
 }) => {
   const { openPhoto } = usePhotoPortal();
   const image = getImage(photo);
+  if (!photo.name) console.debug("alt is undefined in ", photo, photo.name);
   return (
     <span onClick={() => openPhoto(photo)} style={{ cursor: "pointer" }}>
       <GatsbyImage

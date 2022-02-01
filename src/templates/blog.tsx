@@ -3,7 +3,6 @@ import { graphql } from "gatsby";
 import { Header, PhotoGrid } from "../components";
 import rehypeReact from "rehype-react";
 import "./blog.scss";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import {
   ImageWithPreview,
   PhotoPreviewPortal,
@@ -25,6 +24,7 @@ export const query = graphql`
               formats: [AUTO, WEBP, AVIF]
             )
           }
+          name
         }
       }
       fields {
@@ -132,9 +132,7 @@ const PhotoAdapter = (pageData: Data) => (props: any) => {
 
   return (
     <div className="single-image container-sm">
-      <ImageWithPreview
-        photo={photoObject.name.childImageSharp.gatsbyImageData}
-      />
+      <ImageWithPreview photo={photoObject.name} />
     </div>
   );
 };
@@ -159,13 +157,7 @@ const BannerImage = ({ data }: ScreenProps) => {
     return null;
   }
 
-  return (
-    <ImageWithPreview
-      photo={
-        data.markdownRemark.frontmatter.banner.childImageSharp.gatsbyImageData
-      }
-    />
-  );
+  return <ImageWithPreview photo={data.markdownRemark.frontmatter.banner} />;
 };
 
 const Banner = ({ data }: { data: Data }) => {
