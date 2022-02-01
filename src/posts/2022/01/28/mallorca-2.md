@@ -2,6 +2,7 @@
 author: Lucian Boaca
 date: 28-01-2022
 title: Berlin Part 1
+banner: DSCF2672-2
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nisl odio, mattis a lorem malesuada, dictum dignissim ante. Nulla id lacinia ante, et convallis magna. Phasellus auctor purus quis diam convallis, et pulvinar metus sodales. Nulla facilisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus non consequat ante. Donec a metus lacinia, pretium nunc vel, bibendum nisl. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris purus tellus, pulvinar non elementum nec, sagittis quis sem. Sed quis elementum nisi. Integer rutrum sapien vel lectus volutpat, a consequat risus efficitur. Sed eleifend sit amet eros sit amet dapibus. Aliquam in diam non nunc consectetur consectetur id luctus ipsum. Donec at rhoncus urna.
