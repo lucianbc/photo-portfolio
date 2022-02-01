@@ -23,15 +23,19 @@ h1 {
   font-size: 1.125rem;
 }
 
+.no-scroll {
+  overflow-y: hidden;
+}
+
 .container-md {
-  width: 80%;
+  width: 90%;
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
 }
 
 .container-sm {
-  width: 70%;
+  width: 90%;
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;

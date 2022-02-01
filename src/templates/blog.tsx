@@ -4,6 +4,10 @@ import { Header, PhotoGrid } from "../components";
 import rehypeReact from "rehype-react";
 import "./blog.scss";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import {
+  ImageWithPreview,
+  PhotoPreviewPortal,
+} from "../components/PhotoPreviewPortal";
 
 export const query = graphql`
   query BlogQuery($slug: String!) {
@@ -30,7 +34,7 @@ export const query = graphql`
             id
             childImageSharp {
               gatsbyImageData(
-                width: 800
+                width: 1800
                 placeholder: BLURRED
                 formats: [AUTO, WEBP, AVIF]
               )
@@ -126,11 +130,11 @@ const PhotoAdapter = (pageData: Data) => (props: any) => {
     return null;
   }
 
-  const image = getImage(photoObject.name.childImageSharp.gatsbyImageData);
-
   return (
     <div className="single-image container-sm">
-      <GatsbyImage image={image} alt="none" />
+      <ImageWithPreview
+        photo={photoObject.name.childImageSharp.gatsbyImageData}
+      />
     </div>
   );
 };
@@ -154,10 +158,14 @@ const BannerImage = ({ data }: ScreenProps) => {
   if (!data.markdownRemark.frontmatter.banner) {
     return null;
   }
-  const image = getImage(
-    data.markdownRemark.frontmatter.banner.childImageSharp.gatsbyImageData
+
+  return (
+    <ImageWithPreview
+      photo={
+        data.markdownRemark.frontmatter.banner.childImageSharp.gatsbyImageData
+      }
+    />
   );
-  return <GatsbyImage image={image} alt="banner" />;
 };
 
 const Banner = ({ data }: { data: Data }) => {
@@ -177,11 +185,11 @@ const Banner = ({ data }: { data: Data }) => {
 const BlogPage = ({ data }: { data: Data }) => {
   const renderAST = useRenderAst(data);
   return (
-    <>
+    <PhotoPreviewPortal>
       <Header />
       <Banner data={data} />
       {renderAST(data.markdownRemark.htmlAst)}
-    </>
+    </PhotoPreviewPortal>
   );
 };
 

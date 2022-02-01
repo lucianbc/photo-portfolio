@@ -3,6 +3,7 @@ import { graphql, Link } from "gatsby";
 import { Footer, PhotoGrid, ScrollHeader } from "../components";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import styled from "styled-components";
+import { PhotoPreviewPortal } from "../components/PhotoPreviewPortal";
 
 export const query = graphql`
   query IndexPageQuery {
@@ -13,7 +14,7 @@ export const query = graphql`
       nodes {
         childImageSharp {
           gatsbyImageData(
-            width: 800
+            width: 1800
             placeholder: DOMINANT_COLOR
             formats: [AUTO, WEBP, AVIF]
           )
@@ -162,7 +163,7 @@ const WhoAmI = () => {
 
 const IndexPage = ({ data }: { data: QueryResult }) => {
   return (
-    <>
+    <PhotoPreviewPortal>
       <ScrollHeader />
       <Hero data={data.heroPhoto} />
       <WhoAmI />
@@ -170,7 +171,7 @@ const IndexPage = ({ data }: { data: QueryResult }) => {
         <PhotoGrid photos={data.allFile.nodes.slice(0, 6)} />
       </section>
       <Footer />
-    </>
+    </PhotoPreviewPortal>
   );
 };
 

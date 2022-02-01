@@ -3,6 +3,7 @@ import layout from "justified-layout";
 import { getImage, GatsbyImage } from "gatsby-plugin-image";
 import styled from "styled-components";
 import { Link } from "gatsby";
+import { ImageWithPreview } from "./PhotoPreviewPortal";
 
 type Props = {
   photos: {
@@ -75,18 +76,26 @@ export const PhotoGrid = ({ photos }: Props) => {
                   100,
               }))}
             >
-              <Link to={`/photos/${photo.id}`}>
-                <GatsbyImage
-                  image={getImage(photo as any)}
-                  alt={photo.name}
-                  style={{ height: "100%", width: "100%" }}
-                />
-              </Link>
+              <ImageWithPreview photo={photo} />
             </PhotoBox>
           ))
         )}
       </div>
     </GridContainer>
+  );
+};
+
+type Photo = Props["photos"][number];
+// @ts-ignore
+const PhotoWithLink = ({ photo }: { photo: Photo }) => {
+  return (
+    <Link to={`/photos/${photo.id}`}>
+      <GatsbyImage
+        image={getImage(photo as any)}
+        alt={photo.name}
+        style={{ height: "100%", width: "100%" }}
+      />
+    </Link>
   );
 };
 
@@ -112,9 +121,6 @@ const PhotoBox = styled.div<PhotoBoxProps>`
   display: inline-block;
   padding: 5px;
   box-sizing: border-box;
-  :hover {
-    opacity: 0.9;
-  }
   transition: all 0.2s;
 `;
 
