@@ -1,0 +1,34 @@
+$grid-spacing: 20px;
+
+.posts-section {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  > * {
+    padding: 0 $grid-spacing;
+    margin-bottom: $grid-spacing;
+    min-width: 318px;
+    flex-grow: 1;
+  }
+  margin-left: -$grid-spacing;
+  margin-right: -$grid-spacing;
+}
+
+article.blog-card {
+  * {
+    text-decoration: none;
+    text-align: center;
+  }
+
+  h3 {
+    margin: 0;
+    margin-top: 0.5rem;
+    margin-bottom: 0.2rem;
+  }
+  p {
+    margin: 0;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: #282727;
+  }
+}

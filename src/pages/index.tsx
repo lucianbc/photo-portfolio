@@ -1,6 +1,6 @@
 import React from "react";
 import { graphql, Link } from "gatsby";
-import { Footer, PhotoGrid, ScrollHeader } from "../components";
+import { BlogCards, Footer, PhotoGrid, ScrollHeader } from "../components";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import styled from "styled-components";
 import { PhotoPreviewPortal } from "../components/PhotoPreviewPortal";
@@ -38,6 +38,26 @@ export const query = graphql`
         )
       }
     }
+    allMarkdownRemark(limit: 3) {
+      nodes {
+        frontmatter {
+          title
+          date
+          banner {
+            childImageSharp {
+              gatsbyImageData(
+                width: 300
+                placeholder: BLURRED
+                formats: [AUTO, WEBP, AVIF]
+              )
+            }
+          }
+        }
+        fields {
+          slug
+        }
+      }
+    }
   }
 `;
 
@@ -60,6 +80,22 @@ type QueryResult = {
   };
   heroPhoto: {
     childImageSharp: ChildImageSharp;
+  };
+  allMarkdownRemark: {
+    nodes: {
+      frontmatter: {
+        title: string;
+        date: string;
+        banner: {
+          childImageSharp: {
+            gatsbyImageData: any;
+          };
+        };
+      };
+      fields: {
+        slug: string;
+      };
+    }[];
   };
 };
 
@@ -167,8 +203,12 @@ const IndexPage = ({ data }: { data: QueryResult }) => {
       <ScrollHeader />
       <Hero data={data.heroPhoto} />
       <WhoAmI />
-      <section style={{ paddingTop: "0px" }} className="container-lg">
-        <PhotoGrid photos={data.allFile.nodes.slice(0, 6)} />
+      <section className="container-md">
+        <h2>Recent posts</h2>
+        <BlogCards nodes={data.allMarkdownRemark.nodes} />
+        <Link to="/blog" className="underlined-anim underlined-anim-black">
+          View more
+        </Link>
       </section>
       <Footer />
     </PhotoPreviewPortal>

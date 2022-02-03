@@ -1,8 +1,8 @@
 ---
 author: Lucian Boaca
 date: 28-01-2022
-title: Berlin Part 1
-banner: DSCF2672-2
+title: Berlin - One
+banner: DSCF6463
 ---
 
 <photo>DSCF1130-2</photo>
