@@ -1,6 +1,6 @@
 import React from "react";
 import { graphql } from "gatsby";
-import { BlogCards, Footer, Header } from "../components";
+import { Banner, BlogCards, Footer, Header } from "../components";
 
 export const query = graphql`
   query BlogPage {
@@ -46,19 +46,11 @@ type ScreenData = {
   };
 };
 
-const Banner = () => {
-  return (
-    <div className="container-lg banner-page">
-      <h1>Blog</h1>
-    </div>
-  );
-};
-
 const Blog: React.FC<{ data: ScreenData }> = ({ data }) => {
   return (
     <>
       <Header />
-      <Banner />
+      <Banner title="Blog" />
 
       <div className="container-md">
         <BlogCards nodes={data.allMarkdownRemark.nodes} />
