@@ -368,6 +368,14 @@ footer {
   }
 }
 
+.banner-page {
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .social-logo {
   width: 20px;
   height: 20px;

@@ -1,7 +1,6 @@
 import React from "react";
 import { graphql } from "gatsby";
 import { BlogCards, Footer, Header } from "../components";
-import "./blog.scss";
 
 export const query = graphql`
   query BlogPage {
