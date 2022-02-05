@@ -38,7 +38,7 @@ export const query = graphql`
         )
       }
     }
-    allMarkdownRemark(limit: 3) {
+    allMarkdownRemark(limit: 6) {
       nodes {
         frontmatter {
           title
@@ -176,23 +176,39 @@ const HeroLinks = styled.ul`
 
 const WhoAmI = () => {
   return (
-    <section
-      className="container-sm text-center content-font-size"
-      style={{
-        paddingTop: "160px",
-        paddingBottom: "90px",
-      }}
-    >
-      <h2>Who am I</h2>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
-      </p>
+    <section className="color-secondary">
+      <div
+        className="container-sm text-center content-font-size"
+        style={{
+          paddingTop: "90px",
+          paddingBottom: "90px",
+        }}
+      >
+        <h2>Who am I</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+      </div>
+    </section>
+  );
+};
+
+const RecentPosts = ({ data }: { data: QueryResult }) => {
+  return (
+    <section className="padded-vertical">
+      <div className="container-md">
+        <h2>Recent posts</h2>
+        <BlogCards nodes={data.allMarkdownRemark.nodes} />
+        <Link to="/blog" className="underlined-anim underlined-anim-black">
+          View more
+        </Link>
+      </div>
     </section>
   );
 };
@@ -203,13 +219,7 @@ const IndexPage = ({ data }: { data: QueryResult }) => {
       <ScrollHeader />
       <Hero data={data.heroPhoto} />
       <WhoAmI />
-      <section className="container-md">
-        <h2>Recent posts</h2>
-        <BlogCards nodes={data.allMarkdownRemark.nodes} />
-        <Link to="/blog" className="underlined-anim underlined-anim-black">
-          View more
-        </Link>
-      </section>
+      <RecentPosts data={data} />
       <Footer />
     </PhotoPreviewPortal>
   );

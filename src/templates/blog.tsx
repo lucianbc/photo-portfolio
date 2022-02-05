@@ -1,6 +1,6 @@
 import React from "react";
 import { graphql } from "gatsby";
-import { Header, PhotoGrid } from "../components";
+import { Footer, Header, PhotoGrid } from "../components";
 import rehypeReact from "rehype-react";
 import "./blog.scss";
 import {
@@ -181,6 +181,7 @@ const BlogPage = ({ data }: { data: Data }) => {
       <Header />
       <Banner data={data} />
       {renderAST(data.markdownRemark.htmlAst)}
+      <Footer />
     </PhotoPreviewPortal>
   );
 };

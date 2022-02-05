@@ -1,6 +1,6 @@
 import React from "react";
 import { graphql } from "gatsby";
-import { BlogCards, Header } from "../components";
+import { BlogCards, Footer, Header } from "../components";
 import "./blog.scss";
 
 export const query = graphql`
@@ -64,6 +64,8 @@ const Blog: React.FC<{ data: ScreenData }> = ({ data }) => {
       <div className="container-md">
         <BlogCards nodes={data.allMarkdownRemark.nodes} />
       </div>
+
+      <Footer />
     </>
   );
 };

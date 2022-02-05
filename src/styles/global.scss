@@ -334,3 +334,53 @@ header {
     height: 1px;
   }
 }
+
+.color-secondary {
+  background-color: #f6f6f6;
+}
+
+.padded-vertical {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+footer {
+  height: 250px;
+  margin-top: 40px;
+  > div {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    > div:first-child {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    > div:nth-child(2) {
+      color: #787878;
+      font-size: 0.8rem;
+    }
+  }
+}
+
+.social-logo {
+  width: 20px;
+  height: 20px;
+  transition: all 0.2s;
+}
+
+.social-logo-wrapper {
+  padding: 10px;
+  display: inline-block;
+
+  &:hover {
+    .social-logo {
+      transform: scale(1.3);
+    }
+  }
+}
