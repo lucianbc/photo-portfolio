@@ -17,7 +17,6 @@ async function onCreateNode(params) {
 
 async function createPages({ graphql, actions }) {
   const { createPage } = actions;
-  await createPhotoPages(createPage, graphql);
   await createBlogPages(createPage, graphql);
 }
 
@@ -79,38 +78,6 @@ async function enhanceImageNode({ node, actions: { createNodeField } }) {
       aspectRatio: size.width / size.height,
     },
     node,
-  });
-}
-
-async function createPhotoPages(createPage, graphql) {
-  const photoPageTemplate = path.resolve(`src/templates/photo.tsx`);
-  const photosQuery = `
-    query loadPhotosForPages {
-      allFile(filter: {
-        sourceInstanceName:{
-          eq: "photos"
-        }
-      }) {
-        nodes {
-          id
-        }
-      }
-    }  
-  `;
-  const photos = await graphql(photosQuery).then((result) => {
-    if (result.errors) {
-      throw result.errors;
-    }
-    return result.data.allFile.nodes;
-  });
-  photos.forEach((node) => {
-    createPage({
-      path: `/photos/${node.id}`,
-      component: photoPageTemplate,
-      context: {
-        photoId: node.id,
-      },
-    });
   });
 }
 
