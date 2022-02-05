@@ -2,7 +2,11 @@ import React from "react";
 
 export const TwitterLogo = () => {
   return (
-    <a className="social-logo-wrapper" href="https://twitter.com/lucian_bc">
+    <a
+      className="social-logo-wrapper"
+      href="https://twitter.com/lucian_bc"
+      target="_blank"
+    >
       <svg
         className="social-logo"
         xmlns="http://www.w3.org/2000/svg"

@@ -5,6 +5,7 @@ export const InstaLogo = () => {
     <a
       className="social-logo-wrapper"
       href="https://www.instagram.com/lucian.boaca/"
+      target="_blank"
     >
       <svg
         className="social-logo"
