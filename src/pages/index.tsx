@@ -7,15 +7,16 @@ import { PhotoPreviewPortal } from "../components/PhotoPreviewPortal";
 
 export const query = graphql`
   query IndexPageQuery {
-    allFile(
-      filter: {
-        sourceInstanceName: { eq: "photos" }
-        fields: { dimension: { aspectRatio: { eq: 1.5 } } }
+    heroPhoto: file(relativePath: { eq: "DSCF1715-2.jpg" }) {
+      childImageSharp {
+        gatsbyImageData(
+          placeholder: DOMINANT_COLOR
+          formats: [AUTO, WEBP, AVIF]
+        )
       }
-      sort: { fields: fields___exif___exif___DateTimeOriginal, order: [DESC] }
-      limit: 6
-    ) {
-      nodes {
+    }
+    index {
+      feedPreview {
         childImageSharp {
           gatsbyImageData(
             width: 1800
@@ -32,14 +33,6 @@ export const query = graphql`
             aspectRatio
           }
         }
-      }
-    }
-    heroPhoto: file(relativePath: { eq: "DSCF1715-2.jpg" }) {
-      childImageSharp {
-        gatsbyImageData(
-          placeholder: DOMINANT_COLOR
-          formats: [AUTO, WEBP, AVIF]
-        )
       }
     }
     allMarkdownRemark(limit: 6) {
@@ -68,8 +61,8 @@ export const query = graphql`
 type ChildImageSharp = any;
 
 type QueryResult = {
-  allFile: {
-    nodes: {
+  index: {
+    feedPreview: {
       name: string;
       id: string;
       childImageSharp: ChildImageSharp;
@@ -182,7 +175,7 @@ const Highlights = ({ data }: { data: QueryResult }) => {
   return (
     <section className="padded-vertical color-secondary">
       <div className="container-md">
-        <PhotoGrid photos={data.allFile.nodes} />
+        <PhotoGrid photos={data.index.feedPreview as any} />
       </div>
     </section>
   );
@@ -208,7 +201,6 @@ const IndexPage = ({ data }: { data: QueryResult }) => {
       <ScrollHeader />
       <Hero data={data.heroPhoto} />
       <Highlights data={data} />
-      {/* <WhoAmI /> */}
       <RecentPosts data={data} />
       <Footer />
     </PhotoPreviewPortal>

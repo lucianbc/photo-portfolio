@@ -5,11 +5,8 @@ import { PhotoPreviewPortal } from "../components/PhotoPreviewPortal";
 
 export const query = graphql`
   query FeedPageQuery {
-    allFile(
-      filter: { sourceInstanceName: { eq: "photos" } }
-      sort: { fields: fields___exif___exif___DateTimeOriginal, order: [DESC] }
-    ) {
-      nodes {
+    feed {
+      images {
         childImageSharp {
           gatsbyImageData(
             width: 1800
@@ -37,7 +34,7 @@ const Feed = ({ data }) => {
       <Header />
       <Banner title="Feed" />
       <div className="container-lg">
-        <PhotoGrid photos={data.allFile.nodes} />
+        <PhotoGrid photos={data.feed.images} />
       </div>
       <Footer />
     </PhotoPreviewPortal>

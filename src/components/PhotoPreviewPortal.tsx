@@ -73,33 +73,6 @@ type AllPhotos = {
   };
 };
 
-const useFindPhoto = () => {
-  const allPhotos: AllPhotos = useStaticQuery(graphql`
-    query AllPhotos {
-      allFile(filter: { sourceInstanceName: { eq: "photos" } }) {
-        nodes {
-          childImageSharp {
-            gatsbyImageData(
-              width: 1800
-              placeholder: DOMINANT_COLOR
-              formats: [AUTO, WEBP, AVIF]
-            )
-          }
-          id
-          name
-        }
-      }
-    }
-  `);
-  const findSizedPhoto = (photo: ImageSharp) => {
-    return allPhotos.allFile.nodes.find(
-      (sizedNode) => sizedNode.id === photo.id
-    );
-  };
-
-  return findSizedPhoto;
-};
-
 const PhotoPreview: React.FC<{ photo: ImageSharp }> = ({ photo }) => {
   const { closePortal } = usePhotoPortal();
   useEffect(() => {

@@ -7,6 +7,7 @@ module.exports = {
     `gatsby-plugin-image`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
+    `gatsby-transformer-json`,
     {
       resolve: `gatsby-transformer-remark`,
       options: {
@@ -29,14 +30,21 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `photos`,
-        path: `${__dirname}/src/images/portfolio/`,
+        path: `${__dirname}/src/content/images/portfolio/`,
       },
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: "posts",
-        path: `${__dirname}/src/posts/`,
+        path: `${__dirname}/src/content/posts/`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: "configs",
+        path: `${__dirname}/src/content/configs/`,
       },
     },
     `gatsby-plugin-styled-components`,

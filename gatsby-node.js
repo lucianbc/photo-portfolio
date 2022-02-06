@@ -13,11 +13,42 @@ async function onCreateNode(params) {
   if (node.internal.type === "MarkdownRemark") {
     enhanceMarkdownPost(params);
   }
+  if (node.sourceInstanceName === "configs") {
+    createConfigs(params);
+  }
 }
 
 async function createPages({ graphql, actions }) {
   const { createPage } = actions;
   await createBlogPages(createPage, graphql);
+}
+
+async function createConfigs(params) {
+  const { node, createNodeId, createContentDigest, actions } = params;
+  const { createNode } = actions;
+  if (node.name === "feed") {
+    const feedObject = JSON.parse(node.internal.content);
+    const nodeMeta = {
+      id: createNodeId(`feed-${node.id}`),
+      internal: {
+        type: "Feed",
+        contentDigest: createContentDigest(feedObject),
+      },
+    };
+    const feedNode = Object.assign({}, feedObject, nodeMeta);
+    createNode(feedNode);
+  } else if (node.name === "index") {
+    const feedObject = JSON.parse(node.internal.content);
+    const nodeMeta = {
+      id: createNodeId(`feed-${node.id}`),
+      internal: {
+        type: "Index",
+        contentDigest: createContentDigest(feedObject),
+      },
+    };
+    const feedNode = Object.assign({}, feedObject, nodeMeta);
+    createNode(feedNode);
+  }
 }
 
 async function enhanceMarkdownPost(params) {
@@ -59,7 +90,21 @@ const createSchemaCustomization = (params) => {
     }
   `;
 
+  const feedDefs = `
+    type Feed implements Node {
+      images(limit: Int, skip: Int): [File]! @link(by: "name")
+    }
+  `;
+
+  const indexDefs = `
+    type Index implements Node {
+      feedPreview(limit: Int, skip: Int): [File]! @link(by: "name")
+    }
+  `;
+
   createTypes(typeDefs);
+  createTypes(feedDefs);
+  createTypes(indexDefs);
 };
 
 async function enhanceImageNode({ node, actions: { createNodeField } }) {
@@ -101,8 +146,6 @@ async function createBlogPages(createPage, graphql) {
   const blogPostData = result.data.allMarkdownRemark.nodes;
 
   blogPostData.forEach((node) => {
-    // const photos = runExtractAllPhotoNames(node.htmlAst);
-    // console.debug("photos here", photos);
     createPage({
       path: node.fields.slug,
       component: path.resolve("./src/templates/blog.tsx"),
