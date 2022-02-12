@@ -32,8 +32,8 @@ const aboutMe = [
   way possible.
   `,
   `
-  My current gear consists of a Fujifilm X-T30 with a couple of Fuji lenses and some vintage manual focus lenses and 
-  I find this set up to be very fun to use.
+  My current gear consists of a Fujifilm X-T30 with a couple of Fuji lenses and some vintage manual focus lenses. 
+  I find this set up to be very fun and quite inspiring to use.
   `,
 ];
 
