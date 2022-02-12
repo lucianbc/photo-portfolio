@@ -28,6 +28,7 @@ export const BlogCards: React.FC<BlogNodes> = ({ nodes }) => {
           <Link
             to={node.fields.slug}
             style={{ textDecoration: "none", color: "inherit" }}
+            key={node.fields.slug}
           >
             <article className="blog-card">
               <GatsbyImage
