@@ -1,8 +1,8 @@
 ---
 author: Lucian Boaca
-date: 28-01-2022
-title: Mallorca - Three
-banner: DSCF5628
+date: 24-09-2021
+title: Mallorca - One
+banner: DSCF5335
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nisl odio, mattis a lorem malesuada, dictum dignissim ante. Nulla id lacinia ante, et convallis magna. Phasellus auctor purus quis diam convallis, et pulvinar metus sodales. Nulla facilisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus non consequat ante. Donec a metus lacinia, pretium nunc vel, bibendum nisl. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris purus tellus, pulvinar non elementum nec, sagittis quis sem. Sed quis elementum nisi. Integer rutrum sapien vel lectus volutpat, a consequat risus efficitur. Sed eleifend sit amet eros sit amet dapibus. Aliquam in diam non nunc consectetur consectetur id luctus ipsum. Donec at rhoncus urna.
@@ -16,3 +16,28 @@ Morbi consequat lorem id neque mollis ullamcorper. Sed enim diam, pulvinar quis 
 ## That's what I say
 
 Vestibulum augue libero, porttitor in iaculis a, elementum at mauris. Aliquam sollicitudin congue pharetra. Suspendisse eget mauris nec eros facilisis venenatis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed eget luctus nisl, non dictum lectus. Nulla at mollis sapien. Phasellus arcu orci, posuere et nunc sed, tristique feugiat nisi.
+
+<photo-grid>
+  <photo>DSCF5306</photo>
+  <photo>DSCF5314</photo>
+  <photo>DSCF5316</photo>
+  <photo>DSCF5335</photo>
+  <photo>DSCF5342</photo>
+  <photo>DSCF5352</photo>
+  <photo>DSCF5354</photo>
+  <photo>DSCF5361</photo>
+  <photo>DSCF5363</photo>
+  <photo>DSCF5364</photo>
+  <photo>DSCF5366</photo>
+  <photo>DSCF5374</photo>
+  <photo>DSCF5515</photo>
+  <photo>DSCF5524</photo>
+  <photo>DSCF5531</photo>
+  <photo>DSCF5534</photo>
+  <photo>DSCF5549</photo>
+  <photo>DSCF5552</photo>
+  <photo>DSCF5555</photo>
+  <photo>DSCF5559</photo>
+  <photo>DSCF5612</photo>
+  <photo>DSCF5623</photo>
+</photo-grid>

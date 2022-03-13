@@ -4,7 +4,7 @@ import { Banner, BlogCards, Footer, Header } from "../components";
 
 export const query = graphql`
   query BlogPage {
-    allMarkdownRemark {
+    allMarkdownRemark(sort: { fields: fields___slug, order: DESC }) {
       nodes {
         frontmatter {
           title
@@ -15,6 +15,7 @@ export const query = graphql`
                 width: 300
                 placeholder: BLURRED
                 formats: [AUTO, WEBP, AVIF]
+                aspectRatio: 1.5
               )
             }
           }

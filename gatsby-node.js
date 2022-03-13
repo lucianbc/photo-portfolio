@@ -30,6 +30,7 @@ async function createConfigs(params) {
     const feedObject = JSON.parse(node.internal.content);
     const nodeMeta = {
       id: createNodeId(`feed-${node.id}`),
+      parent: node.id,
       internal: {
         type: "Feed",
         contentDigest: createContentDigest(feedObject),
@@ -40,7 +41,8 @@ async function createConfigs(params) {
   } else if (node.name === "index") {
     const feedObject = JSON.parse(node.internal.content);
     const nodeMeta = {
-      id: createNodeId(`feed-${node.id}`),
+      id: createNodeId(`index-${node.id}`),
+      parent: node.id,
       internal: {
         type: "Index",
         contentDigest: createContentDigest(feedObject),

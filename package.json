@@ -12,13 +12,15 @@
     "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "clean": "gatsby clean",
+    "optimise": "./scripts/optimise.js"
   },
   "dependencies": {
     "@fontsource/montserrat": "^4.5.1",
     "@fontsource/source-sans-pro": "^4.5.1",
     "babel-plugin-styled-components": "^1.13.2",
     "exif": "^0.6.0",
+    "fs-extra": "^10.0.1",
     "gatsby": "^4.5.5",
     "gatsby-plugin-image": "^2.5.2",
     "gatsby-plugin-sass": "^5.6.0",

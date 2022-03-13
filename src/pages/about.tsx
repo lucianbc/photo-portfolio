@@ -5,7 +5,7 @@ import { Footer, Header } from "../components";
 
 export const query = graphql`
   query AboutQuery {
-    aboutPhoto: file(relativePath: { eq: "DSCF4316.jpg" }) {
+    aboutPhoto: file(name: { eq: "DSCF4316" }) {
       childImageSharp {
         gatsbyImageData(
           placeholder: DOMINANT_COLOR

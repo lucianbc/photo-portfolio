@@ -7,7 +7,7 @@ import { PhotoPreviewPortal } from "../components/PhotoPreviewPortal";
 
 export const query = graphql`
   query IndexPageQuery {
-    heroPhoto: file(relativePath: { eq: "DSCF1715-2.jpg" }) {
+    heroPhoto: file(name: { eq: "DSCF1715" }) {
       childImageSharp {
         gatsbyImageData(
           placeholder: DOMINANT_COLOR
@@ -35,7 +35,7 @@ export const query = graphql`
         }
       }
     }
-    allMarkdownRemark(limit: 6) {
+    allMarkdownRemark(limit: 6, sort: { fields: fields___slug, order: DESC }) {
       nodes {
         frontmatter {
           title
@@ -46,6 +46,7 @@ export const query = graphql`
                 width: 300
                 placeholder: BLURRED
                 formats: [AUTO, WEBP, AVIF]
+                aspectRatio: 1.5
               )
             }
           }

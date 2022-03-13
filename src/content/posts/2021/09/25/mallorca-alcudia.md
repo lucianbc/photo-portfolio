@@ -1,8 +1,8 @@
 ---
 author: Lucian Boaca
-date: 28-01-2022
-title: London Rainy Night
-banner: DSCF7140
+date: 25-09-2021
+title: Mallorca - Two
+banner: DSCF5628
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nisl odio, mattis a lorem malesuada, dictum dignissim ante. Nulla id lacinia ante, et convallis magna. Phasellus auctor purus quis diam convallis, et pulvinar metus sodales. Nulla facilisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus non consequat ante. Donec a metus lacinia, pretium nunc vel, bibendum nisl. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris purus tellus, pulvinar non elementum nec, sagittis quis sem. Sed quis elementum nisi. Integer rutrum sapien vel lectus volutpat, a consequat risus efficitur. Sed eleifend sit amet eros sit amet dapibus. Aliquam in diam non nunc consectetur consectetur id luctus ipsum. Donec at rhoncus urna.
@@ -16,3 +16,36 @@ Morbi consequat lorem id neque mollis ullamcorper. Sed enim diam, pulvinar quis 
 ## That's what I say
 
 Vestibulum augue libero, porttitor in iaculis a, elementum at mauris. Aliquam sollicitudin congue pharetra. Suspendisse eget mauris nec eros facilisis venenatis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed eget luctus nisl, non dictum lectus. Nulla at mollis sapien. Phasellus arcu orci, posuere et nunc sed, tristique feugiat nisi.
+
+<photo-grid>
+  <photo>DSCF5627</photo>
+  <photo>DSCF5628</photo>
+  <photo>DSCF5630</photo>
+  <photo>DSCF5642</photo>
+  <photo>DSCF5646</photo>
+  <photo>DSCF5649</photo>
+  <photo>DSCF5650</photo>
+  <photo>DSCF5662</photo>
+  <photo>DSCF5700</photo>
+  <photo>DSCF5713</photo>
+  <photo>DSCF5717</photo>
+  <photo>DSCF5718</photo>
+  <photo>DSCF5720</photo>
+  <photo>DSCF5726</photo>
+  <photo>DSCF5728</photo>
+  <photo>DSCF5758</photo>
+  <photo>DSCF5759</photo>
+  <photo>DSCF5760</photo>
+  <photo>DSCF5762</photo>
+  <photo>DSCF5764</photo>
+  <photo>DSCF6035</photo>
+  <photo>DSCF6039</photo>
+  <photo>DSCF6040</photo>
+  <photo>DSCF6041</photo>
+  <photo>DSCF6046</photo>
+  <photo>DSCF6050</photo>
+  <photo>DSCF6053</photo>
+  <photo>DSCF6071</photo>
+  <photo>DSCF6073</photo>
+  <photo>DSCF6076</photo>
+</photo-grid>

@@ -1,8 +1,8 @@
 ---
 author: Lucian Boaca
-date: 28-01-2022
-title: Mallorca - Two
-banner: DSCF5581
+date: 12-12-2021
+title: London Rainy Night
+banner: DSCF7140
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nisl odio, mattis a lorem malesuada, dictum dignissim ante. Nulla id lacinia ante, et convallis magna. Phasellus auctor purus quis diam convallis, et pulvinar metus sodales. Nulla facilisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus non consequat ante. Donec a metus lacinia, pretium nunc vel, bibendum nisl. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Mauris purus tellus, pulvinar non elementum nec, sagittis quis sem. Sed quis elementum nisi. Integer rutrum sapien vel lectus volutpat, a consequat risus efficitur. Sed eleifend sit amet eros sit amet dapibus. Aliquam in diam non nunc consectetur consectetur id luctus ipsum. Donec at rhoncus urna.
@@ -16,3 +16,24 @@ Morbi consequat lorem id neque mollis ullamcorper. Sed enim diam, pulvinar quis 
 ## That's what I say
 
 Vestibulum augue libero, porttitor in iaculis a, elementum at mauris. Aliquam sollicitudin congue pharetra. Suspendisse eget mauris nec eros facilisis venenatis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed eget luctus nisl, non dictum lectus. Nulla at mollis sapien. Phasellus arcu orci, posuere et nunc sed, tristique feugiat nisi.
+
+<photo-grid>
+  <photo>DSCF7092</photo>
+  <photo>DSCF7108</photo>
+  <photo>DSCF7124</photo>
+  <photo>DSCF7140</photo>
+  <photo>DSCF7149</photo>
+  <photo>DSCF7152</photo>
+  <photo>DSCF7158</photo>
+  <photo>DSCF7182</photo>
+  <photo>DSCF7183</photo>
+  <photo>DSCF7191</photo>
+  <photo>DSCF7193</photo>
+  <photo>DSCF7203</photo>
+  <photo>DSCF7207</photo>
+  <photo>DSCF7213</photo>
+  <photo>DSCF7214</photo>
+  <photo>DSCF7216</photo>
+  <photo>DSCF7230</photo>
+  <photo>DSCF7240</photo>
+</photo-grid>
