@@ -1,0 +1,245 @@
+$mobileToggleAnimSpeed: 0.35s;
+
+header {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 50px;
+  align-items: center;
+  text-align: center;
+  font-size: 1.1rem;
+  > * {
+    margin: 0 20px;
+    &:first-child {
+      margin-left: 0;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  ul {
+    // margin: inherit 0 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    li {
+      list-style-type: none;
+      margin-right: 0.6rem;
+      &:last-child {
+        margin-right: 0;
+      }
+
+      position: relative;
+
+      a {
+        position: relative;
+        &::before {
+          content: "";
+          position: absolute;
+          width: 0;
+          height: 1px;
+          bottom: -1px;
+          background-color: black;
+          transition: width 0.5s;
+        }
+
+        &:hover {
+          &::before {
+            width: 100%;
+          }
+        }
+      }
+    }
+    .active {
+      &::before {
+        width: 100%;
+      }
+    }
+  }
+
+  @media (max-width: 750px) {
+    justify-content: center;
+    ul {
+      background-color: white;
+      position: absolute;
+      width: 100%;
+      flex-direction: column;
+      top: 50px;
+      z-index: 99;
+      margin: 0;
+      > li {
+        padding: 10px 0;
+        margin-right: 0;
+      }
+
+      transition: opacity $mobileToggleAnimSpeed;
+
+      height: 0;
+      display: inline-block;
+      opacity: 0;
+      &.active {
+        display: inherit;
+        opacity: 1;
+        height: initial;
+      }
+    }
+    > * {
+      margin: 0;
+    }
+  }
+
+  .mobile-nav-toggle {
+    content: "";
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    display: none;
+
+    @media (max-width: 750px) {
+      display: inherit;
+    }
+
+    .one,
+    .two,
+    .three {
+      width: 100%;
+      height: 2px;
+      display: inline-block;
+      background-color: black;
+      position: absolute;
+      left: 0;
+    }
+    .one {
+      top: 10px;
+    }
+
+    .two {
+      top: calc(50% - 1px);
+    }
+
+    .three {
+      bottom: 10px;
+    }
+
+    &.active {
+      .one {
+        animation: one-to-close $mobileToggleAnimSpeed;
+        animation-fill-mode: forwards;
+      }
+      .two {
+        animation: two-to-close $mobileToggleAnimSpeed;
+        animation-fill-mode: forwards;
+      }
+      .three {
+        animation: three-to-close $mobileToggleAnimSpeed;
+        animation-fill-mode: forwards;
+      }
+    }
+
+    &.inactive {
+      .one {
+        animation: close-to-one $mobileToggleAnimSpeed;
+        animation-fill-mode: forwards;
+      }
+
+      .two {
+        animation: close-to-two $mobileToggleAnimSpeed;
+        animation-fill-mode: forwards;
+      }
+
+      .three {
+        animation: close-to-three $mobileToggleAnimSpeed;
+        animation-fill-mode: forwards;
+      }
+    }
+
+    @keyframes one-to-close {
+      0% {
+        top: 10px;
+        transform: rotate(0deg);
+      }
+      50% {
+        top: calc(50% - 1px);
+        transform: rotate(0deg);
+      }
+      100% {
+        top: calc(50% - 1px);
+        transform: rotate(45deg);
+      }
+    }
+
+    @keyframes two-to-close {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes three-to-close {
+      0% {
+        bottom: 10px;
+        transform: rotate(0deg);
+      }
+      50% {
+        transform: rotate(0deg);
+        bottom: calc(50% - 1px);
+      }
+      100% {
+        transform: rotate(-45deg);
+        bottom: calc(50% - 1px);
+      }
+    }
+
+    @keyframes close-to-one {
+      0% {
+        top: calc(50% - 1px);
+        transform: rotate(45deg);
+      }
+      50% {
+        top: calc(50% - 1px);
+        transform: rotate(0deg);
+      }
+      100% {
+        top: 10px;
+        transform: rotate(0deg);
+      }
+    }
+
+    @keyframes close-to-two {
+      0% {
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes close-to-three {
+      0% {
+        transform: rotate(-45deg);
+        bottom: calc(50% - 1px);
+      }
+      50% {
+        transform: rotate(0deg);
+        bottom: calc(50% - 1px);
+      }
+      100% {
+        transform: rotate(0deg);
+        bottom: 10px;
+      }
+    }
+  }
+}

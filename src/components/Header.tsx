@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "gatsby";
 import { useState } from "react";
+import "./Header.scss";
 
 export const Header = () => {
   const [mobileToggleState, setState] = useState<
