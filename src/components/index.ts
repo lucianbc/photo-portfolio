@@ -7,3 +7,4 @@ export * from "./Banner";
 export * from "./InstaLogo";
 export * from "./TwitterLogo";
 export * from "./Hamburger";
+export * from "./SideNavLayout";
