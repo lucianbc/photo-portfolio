@@ -8,3 +8,4 @@ export * from "./InstaLogo";
 export * from "./TwitterLogo";
 export * from "./Hamburger";
 export * from "./SideNavLayout";
+export * from "./AlbumCard";

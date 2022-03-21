@@ -17,7 +17,7 @@ const SideNavigation = ({ id, className = undefined }) => {
           <Link to="/overview">Overview</Link>
         </li>
         <li>
-          <Link to="/">Albums</Link>
+          <Link to="/albums">Albums</Link>
         </li>
         <li>
           <Link to="/about">About</Link>
