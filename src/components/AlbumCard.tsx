@@ -22,7 +22,7 @@ export const AlbumCard = ({ banner, title }: Props) => {
         <div className="overlay">
           <h3>{title}</h3>
         </div>
-        <GatsbyImage image={image} alt="asd" />
+        <GatsbyImage image={image} alt={title} />
       </Link>
     </article>
   );
