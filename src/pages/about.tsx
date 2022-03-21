@@ -1,21 +1,5 @@
-import { graphql } from "gatsby";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import React from "react";
-import { Footer, Header } from "../components";
-
-export const query = graphql`
-  query AboutQuery {
-    aboutPhoto: file(name: { eq: "DSCF4316" }) {
-      childImageSharp {
-        gatsbyImageData(
-          placeholder: DOMINANT_COLOR
-          formats: [AUTO, WEBP, AVIF]
-          height: 600
-        )
-      }
-    }
-  }
-`;
+import { SideNavLayout } from "../components";
 
 const aboutMe = [
   `
@@ -37,24 +21,14 @@ const aboutMe = [
   `,
 ];
 
-const About = ({ data }) => {
-  const image = data.aboutPhoto.childImageSharp;
+const About = () => {
   return (
-    <>
-      <Header />
-      <div className="container-md">
-        <div className="about">
-          <section>
-            <GatsbyImage alt="about-me" image={getImage(image)} />
-          </section>
-          <section>
-            <h2>About</h2>
-            {React.Children.toArray(aboutMe.map((p) => <p>{p}</p>))}
-          </section>
-        </div>
-      </div>
-      <Footer />
-    </>
+    <SideNavLayout>
+      <section className="container-sm left-aligned">
+        <h2>About</h2>
+        {React.Children.toArray(aboutMe.map((p) => <p>{p}</p>))}
+      </section>
+    </SideNavLayout>
   );
 };
 

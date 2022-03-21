@@ -14,13 +14,13 @@ const SideNavigation = ({ id, className = undefined }) => {
       </Link>
       <ul>
         <li>
-          <Link to="/">Overview</Link>
+          <Link to="/overview">Overview</Link>
         </li>
         <li>
           <Link to="/">Albums</Link>
         </li>
         <li>
-          <Link to="/">About</Link>
+          <Link to="/about">About</Link>
         </li>
       </ul>
       <div>
