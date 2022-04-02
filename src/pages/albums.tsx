@@ -42,14 +42,14 @@ const Wrapper = styled.div`
 
 const AlbumsPage = ({ data }) => {
   return (
-    <SideNavLayout>
-      <h2>Albums</h2>
+    <SideNavLayout title="Albums">
       <Wrapper>
         {React.Children.toArray(
           data.allMarkdownRemark.nodes.map((node) => (
             <AlbumCard
               banner={node.frontmatter.banner}
               title={node.frontmatter.title}
+              slug={node.fields.slug}
             />
           ))
         )}

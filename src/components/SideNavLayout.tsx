@@ -34,7 +34,11 @@ const SideNavigation = ({ id, className = undefined }) => {
   );
 };
 
-export const SideNavLayout = ({ children }) => {
+export const SideNavLayout = ({
+  children,
+  title = undefined,
+  subtitle = undefined,
+}) => {
   const [sideNavRevealed, setSideNavRevealed] = useState(false);
   return (
     <PhotoPreviewPortal>
@@ -48,7 +52,13 @@ export const SideNavLayout = ({ children }) => {
             />
           </div>
         </header>
-        <main>{children}</main>
+        <main>
+          {title ? (
+            <h1 className={subtitle ? "with-subtitle" : ""}>{title}</h1>
+          ) : null}
+          {subtitle ? <span className="subtitle">{subtitle}</span> : null}
+          {children}
+        </main>
         <SideNavigation
           id="desktop-nav"
           className={sideNavRevealed ? "shown" : undefined}

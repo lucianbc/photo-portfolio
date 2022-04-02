@@ -59,7 +59,11 @@ async function enhanceMarkdownPost(params) {
     getNode,
     actions: { createNodeField },
   } = params;
-  const slug = createFilePath({ node, getNode, basePath: `pages` });
+  const slug = `/albums${createFilePath({
+    node,
+    getNode,
+    basePath: `pages`,
+  })}`;
   const rawMarkdown = node.internal.content;
   const photos = extractAllPhotoNamesRegex(rawMarkdown);
 

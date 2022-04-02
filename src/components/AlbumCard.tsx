@@ -12,13 +12,14 @@ type GatsbyImage = {
 type Props = {
   banner: GatsbyImage;
   title: string;
+  slug: string;
 };
 
-export const AlbumCard = ({ banner, title }: Props) => {
+export const AlbumCard = ({ banner, title, slug }: Props) => {
   const image = getImage(banner.childImageSharp.gatsbyImageData);
   return (
     <article className="album-card">
-      <Link to="/">
+      <Link to={slug}>
         <div className="overlay">
           <h3>{title}</h3>
         </div>

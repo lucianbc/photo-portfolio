@@ -1,12 +1,10 @@
 import React from "react";
 import { graphql } from "gatsby";
-import { Footer, Header, PhotoGrid } from "../components";
+import { PhotoGrid, SideNavLayout } from "../components";
 import rehypeReact from "rehype-react";
+import { ImageWithPreview } from "../components/PhotoPreviewPortal";
 import "./blog.scss";
-import {
-  ImageWithPreview,
-  PhotoPreviewPortal,
-} from "../components/PhotoPreviewPortal";
+import { DateTime } from "luxon";
 
 export const query = graphql`
   query BlogQuery($slug: String!) {
@@ -107,10 +105,7 @@ const PhotoGridAdapter = (pageData: Data) => (props: any) => {
   });
 
   return (
-    <div
-      className="container-lg"
-      style={{ marginTop: "80px", marginBottom: "60px" }}
-    >
+    <div>
       <PhotoGrid photos={photos} />
     </div>
   );
@@ -141,6 +136,13 @@ const useRenderAst = (pageData: Data) => {
   const renderAST = new rehypeReact({
     createElement: React.createElement,
     components: {
+      p: () => null,
+      h1: () => null,
+      h2: () => null,
+      h3: () => null,
+      h4: () => null,
+      h5: () => null,
+      h6: () => null,
       ["photo-grid" as any]: PhotoGridAdapter(pageData),
       ["photo" as any]: PhotoAdapter(pageData),
     },
@@ -152,37 +154,24 @@ type ScreenProps = {
   data: Data;
 };
 
-const BannerImage = ({ data }: ScreenProps) => {
-  if (!data.markdownRemark.frontmatter.banner) {
-    return null;
-  }
-
-  return <ImageWithPreview photo={data.markdownRemark.frontmatter.banner} />;
+const formatDate = (dateStr: string) => {
+  const date = DateTime.fromFormat(dateStr, "dd-MM-yyyy");
+  return date.toFormat("MMMM d, yyyy");
 };
 
-const Banner = ({ data }: { data: Data }) => {
-  if (!data.markdownRemark.frontmatter.banner) {
-    return null;
-  }
-
-  return (
-    <div className="banner container-md">
-      <h1>{data.markdownRemark.frontmatter.title}</h1>
-      <p>Posted on {data.markdownRemark.frontmatter.date}</p>
-      <BannerImage data={data} />
-    </div>
-  );
-};
-
-const BlogPage = ({ data }: { data: Data }) => {
+const BlogPage = ({ data }: ScreenProps) => {
   const renderAST = useRenderAst(data);
   return (
-    <PhotoPreviewPortal>
-      <Header />
-      <Banner data={data} />
+    <SideNavLayout
+      title={data.markdownRemark.frontmatter.title}
+      subtitle={
+        data.markdownRemark.frontmatter.date
+          ? `Posted on ${formatDate(data.markdownRemark.frontmatter.date)}`
+          : undefined
+      }
+    >
       {renderAST(data.markdownRemark.htmlAst)}
-      <Footer />
-    </PhotoPreviewPortal>
+    </SideNavLayout>
   );
 };
 
