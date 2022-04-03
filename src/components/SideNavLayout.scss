@@ -43,7 +43,8 @@ $side-nav-width: 250px;
     }
   }
 
-  main {
+  main,
+  footer {
     position: relative;
   }
 
@@ -87,7 +88,8 @@ $side-nav-width: 250px;
   }
 
   @media (min-width: 800px) {
-    main {
+    main,
+    footer {
       margin-left: $side-nav-width;
       padding-top: 30px;
     }

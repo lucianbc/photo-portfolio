@@ -38,6 +38,7 @@ export const SideNavLayout = ({
   children,
   title = undefined,
   subtitle = undefined,
+  copyright = true,
 }) => {
   const [sideNavRevealed, setSideNavRevealed] = useState(false);
   return (
@@ -59,6 +60,13 @@ export const SideNavLayout = ({
           {subtitle ? <span className="subtitle">{subtitle}</span> : null}
           {children}
         </main>
+        {copyright && (
+          <footer>
+            <p>
+              All images &#169; 2020 - 2022 Lucian Boaca - All rights reserved
+            </p>
+          </footer>
+        )}
         <SideNavigation
           id="desktop-nav"
           className={sideNavRevealed ? "shown" : undefined}

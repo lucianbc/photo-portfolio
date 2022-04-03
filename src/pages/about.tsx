@@ -23,7 +23,7 @@ const aboutMe = [
 
 const About = () => {
   return (
-    <SideNavLayout>
+    <SideNavLayout copyright={false}>
       <section className="container-sm left-aligned">
         <h2>About</h2>
         {React.Children.toArray(aboutMe.map((p) => <p>{p}</p>))}
