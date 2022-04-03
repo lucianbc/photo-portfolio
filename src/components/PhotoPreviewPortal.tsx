@@ -1,5 +1,3 @@
-import { graphql, useStaticQuery } from "gatsby";
-import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import React, {
   useCallback,
   useContext,
@@ -7,13 +5,50 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import styled, { keyframes } from "styled-components";
 
 type Props = {
   children: React.ReactNode;
 };
 
-type ImageSharp = any;
+type ImageSharp = {
+  id: string;
+  [k: string]: any;
+};
+
+type PrevNext = {
+  [k: string]: ImageSharp;
+};
+
+const computeNextAndPrev = (photoCollection: ImageSharp[]) => {
+  const next: PrevNext = {};
+  const prev: PrevNext = {};
+  let prevPhoto: ImageSharp | null = null;
+  let crtPhoto: ImageSharp | null = null;
+
+  for (const photo of photoCollection) {
+    prevPhoto = crtPhoto;
+    crtPhoto = photo;
+
+    if (prevPhoto && crtPhoto) {
+      prev[crtPhoto.id] = prevPhoto;
+      next[prevPhoto.id] = crtPhoto;
+    }
+  }
+
+  if (photoCollection.length >= 2) {
+    const first = photoCollection[0];
+    const last = photoCollection[photoCollection.length - 1];
+    next[last.id] = first;
+    prev[first.id] = last;
+  }
+
+  return {
+    next,
+    prev,
+  };
+};
 
 type PortalData =
   | {
@@ -22,11 +57,15 @@ type PortalData =
   | {
       state: "visible";
       photo: ImageSharp;
+      prevNextMap: {
+        next: PrevNext;
+        prev: PrevNext;
+      };
     };
 
 type PortalContext = {
   data: PortalData;
-  openPhoto: (photo: ImageSharp) => void;
+  openPhoto: (photo: ImageSharp, photoCollection?: ImageSharp[]) => void;
   closePortal: () => void;
 };
 
@@ -44,17 +83,46 @@ export const usePhotoPortal = () => {
 
 export const PhotoPreviewPortal: React.FC<Props> = ({ children }) => {
   const [data, setData] = useState(initialValue.data);
-  const openPhoto = useCallback((photo: ImageSharp) => {
-    setData({ state: "visible", photo });
-  }, []);
+  const openPhoto = useCallback(
+    (photo: ImageSharp, photoCollection?: ImageSharp[]) => {
+      const prevNextMap = photoCollection
+        ? computeNextAndPrev(photoCollection)
+        : undefined;
+      setData({ state: "visible", photo, prevNextMap });
+    },
+    []
+  );
   const closePortal = useCallback(() => {
     setData({ state: "empty" });
   }, []);
 
+  const nav =
+    data.state === "visible"
+      ? (() => {
+          const prevPhoto = data.prevNextMap.prev[data.photo.id];
+          const nextPhoto = data.prevNextMap.next[data.photo.id];
+
+          const setPhoto = (photo: ImageSharp) =>
+            photo
+              ? () =>
+                  setData((crt) => ({
+                    ...crt,
+                    photo,
+                  }))
+              : undefined;
+          return {
+            goToNext: setPhoto(nextPhoto),
+            goToPrev: setPhoto(prevPhoto),
+          };
+        })()
+      : undefined;
+
   return (
     <PortalContext.Provider value={{ data, openPhoto, closePortal }}>
       {children}
-      {data.state === "visible" ? <PhotoPreview photo={data.photo} /> : null}
+      {data.state === "visible" ? (
+        <PhotoPreview photo={data.photo} {...nav} />
+      ) : null}
     </PortalContext.Provider>
   );
 };
@@ -79,7 +147,13 @@ type AllPhotos = {
   };
 };
 
-const PhotoPreview: React.FC<{ photo: ImageSharp }> = ({ photo }) => {
+type MaybeCb = (() => void) | undefined;
+
+const PhotoPreview: React.FC<{
+  photo: ImageSharp;
+  goToNext: MaybeCb;
+  goToPrev: MaybeCb;
+}> = ({ photo, goToNext, goToPrev }) => {
   const { closePortal } = usePhotoPortal();
   useEffect(() => {
     disableScroll();
@@ -123,16 +197,23 @@ const PhotoPreview: React.FC<{ photo: ImageSharp }> = ({ photo }) => {
             const position = { x: e.clientX - rect.x, y: e.clientY - rect.y };
             const box = { width: rect.width, height: rect.height };
             const isPrev = position.x < box.width / 2;
-            console.debug("event here", e.clientX, e.pageX, rect.x);
+            if (isPrev && goToPrev) {
+              goToPrev();
+            }
+            if (!isPrev && goToNext) {
+              goToNext();
+            }
           }
         }}
       >
-        <div className="nav-container">
-          <div className="nav-btn prev">
-            <span />
-            <span />
+        {goToPrev ? (
+          <div className="nav-container">
+            <div className="nav-btn prev">
+              <span />
+              <span />
+            </div>
           </div>
-        </div>
+        ) : null}
         <div className="photo-box-wrapper">
           <div className="photo-box">
             <GatsbyImage
@@ -144,12 +225,14 @@ const PhotoPreview: React.FC<{ photo: ImageSharp }> = ({ photo }) => {
           </div>
         </div>
 
-        <div className="nav-container">
-          <div className="nav-btn next">
-            <span />
-            <span />
+        {goToNext ? (
+          <div className="nav-container">
+            <div className="nav-btn next">
+              <span />
+              <span />
+            </div>
           </div>
-        </div>
+        ) : null}
       </div>
     </PhotoPreviewContainer>
   );
@@ -157,16 +240,22 @@ const PhotoPreview: React.FC<{ photo: ImageSharp }> = ({ photo }) => {
 
 type ImageWithPreviewProps = {
   photo: ImageSharp;
+  photoCollection?: ImageSharp[];
 };
 
 export const ImageWithPreview: React.FC<ImageWithPreviewProps> = ({
   photo,
+  photoCollection,
 }) => {
   const { openPhoto } = usePhotoPortal();
-  const image = getImage(photo);
+  const image = getImage(photo as any);
   if (!photo.name) console.debug("alt is undefined in ", photo, photo.name);
+
   return (
-    <span onClick={() => openPhoto(photo)} style={{ cursor: "pointer" }}>
+    <span
+      onClick={() => openPhoto(photo, photoCollection)}
+      style={{ cursor: "pointer" }}
+    >
       <GatsbyImage
         image={image}
         alt={photo.name}
@@ -327,6 +416,16 @@ const PhotoPreviewContainer = styled.div`
           }
         }
       }
+    }
+  }
+
+  .nav-container {
+    display: none;
+  }
+
+  @media (min-width: 800px) {
+    .nav-container {
+      display: flex;
     }
   }
 

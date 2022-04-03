@@ -125,9 +125,14 @@ const PhotoAdapter = (pageData: Data) => (props: any) => {
     return null;
   }
 
+  const allPhotos = pageData.markdownRemark?.fields?.photos;
+
   return (
     <div className="single-image container-sm">
-      <ImageWithPreview photo={photoObject.name} />
+      <ImageWithPreview
+        photo={photoObject.name}
+        photoCollection={allPhotos?.map((x) => x.name)}
+      />
     </div>
   );
 };

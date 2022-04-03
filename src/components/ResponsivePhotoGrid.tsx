@@ -76,7 +76,7 @@ export const PhotoGrid = ({ photos }: Props) => {
                   100,
               }))}
             >
-              <ImageWithPreview photo={photo} />
+              <ImageWithPreview photo={photo} photoCollection={photos} />
             </PhotoBox>
           ))
         )}
