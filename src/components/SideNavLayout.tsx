@@ -62,9 +62,7 @@ export const SideNavLayout = ({
         </main>
         {copyright && (
           <footer>
-            <p>
-              All images &#169; 2020 - 2022 Lucian Boaca - All rights reserved
-            </p>
+            <p>&#169; Lucian Boaca</p>
           </footer>
         )}
         <SideNavigation
