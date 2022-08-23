@@ -1,0 +1,18 @@
+---
+import Nav from "@components/nav.astro"
+---
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My Cool Astro Site</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <Nav />
+    
+    <article>
+      <slot /> <!-- your content is injected here -->
+    </article>
+  </body>
+</html>
