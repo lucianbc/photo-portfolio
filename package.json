@@ -17,6 +17,7 @@
     "googleapis": "^107.0.0"
   },
   "devDependencies": {
+    "@astrojs/image": "^0.3.6",
     "@astrojs/tailwind": "^1.0.0",
     "@types/node": "^18.7.13",
     "ts-node": "^10.9.1"

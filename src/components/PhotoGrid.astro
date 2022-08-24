@@ -1,10 +1,10 @@
 ---
-import { getRandomValues } from 'crypto';
+import { Picture } from '@astrojs/image/components';
 
 export type Props = {
   photos: {
     imagePath: string;
-    aspectRatio: string;
+    aspectRatio: number;
   }[];
 }
 
@@ -17,31 +17,31 @@ const col3 = photos.filter((_, index) => index % 3 === 2);
   <div class="flex flex-col gap-3">
     {col1.map((photo) => (
       <div class="image-item">
-        <div class="bg-black"></div>  
+        <Picture src={photo.imagePath} 
+          sizes="" 
+          widths={[300]} 
+          aspectRatio={photo.aspectRatio} />
       </div>
     ))}
   </div>
   <div class="gallery-column">
     {col2.map((photo) => (
       <div class="image-item">
-        <div class="bg-red"></div>  
+        <Picture src={photo.imagePath} 
+          sizes="" 
+          widths={[300]} 
+          aspectRatio={photo.aspectRatio} />
       </div>
     ))}
   </div>
   <div class="gallery-column">
     {col3.map((photo) => (
-      <div class="image-item">
-        <div class="bg-white"></div>  
+      <div class="relative cursor-pointer">
+        <Picture src={photo.imagePath} 
+          sizes="" 
+          widths={[300]} 
+          aspectRatio={photo.aspectRatio} />
       </div>
     ))}
   </div>
 </div>
-
-<style>
-.image-item {
-  position: relative;
-  cursor: pointer;
-}
-
-
-</style>
