@@ -1,0 +1,128 @@
+---
+import layout from 'justified-layout';
+
+type Image = {
+  path: string;
+  aspectRatio: number;
+};
+
+const breakPoints = [
+  {
+    // default - mobile
+    mediaQuery: null,
+    containerWidth: 400,
+  },
+  {
+    // mobile landscape
+    mediaQuery: 568,
+    containerWidth: 600,
+  },
+  {
+    // tablet
+    mediaQuery: 834,
+    containerWidth: 800,
+  },
+  {
+    // laptop
+    mediaQuery: 1200,
+    containerWidth: 1080,
+  },
+  {
+    // widescreen
+    mediaQuery: 1900,
+    containerWidth: 1900,
+  },
+];
+
+export type Props = {
+  photos: Image[];
+};
+
+const props = Astro.props as Props;
+
+console.debug('astro stuff here', Astro);
+
+const ratios = props.photos.map((p) => p.aspectRatio);
+
+const layoutsPerBreakPoint = breakPoints.map((breakPoint) => ({
+  breakPoint,
+  layout: layout(ratios, {
+    boxSpacing: 0,
+    containerPadding: 0,
+    containerWidth: breakPoint.containerWidth,
+  })
+}))
+
+// const getRatiosAndBreakpointsForPhoto = (photoIndex: number) => {
+//   return layouts.map((layout) => ({
+//     mediaQuery: layout.breakPoint.mediaQuery,
+//     ratio: (layout.layout.boxes[photoIndex].width / layout.breakPoint.containerWidth) * 100
+//   }))
+// }
+
+const layoutsPerPhoto = props.photos.map((photo, index) => {
+  return {
+    responsiveRatios: layoutsPerBreakPoint.map((l) => ({
+      breakpoint: l.breakPoint.mediaQuery,
+      ratio: (l.layout.boxes[index].width / l.breakPoint.containerWidth) * 100
+    }))
+  }
+});
+
+console.debug('layouts here', props.photos.length)
+
+const customStyle = `
+  .photo-box-var-1 {
+    background-color: red;
+    width: 100px;
+    height: 100px;
+  }
+`
+
+---
+<div class="photo-grid-container">
+  <div class="inner-container">
+    {
+      (Astro.props as Props).photos.map((photo, index) => (
+        <div class:list={["photo-box", `photo-box-${index}`]}>
+
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  `${customStyle}`
+</style>
+
+<!-- {
+  (Astro.props as Props).photos.map((_, index) => (
+    <style>
+      .photo-box-var-${index} {
+        background-color: red;
+        width: 100px;
+        height: 100px;
+      }
+    </style>
+  ))
+} -->
+
+<style>
+  .photo-box {
+    display: inline-block;
+    padding: 5px;
+    box-sizing: border-box;
+    transition: all 0.2s;
+  }
+
+  .photo-grid-container {
+    margin: -5px;
+  }
+  
+  .inner-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+</style>

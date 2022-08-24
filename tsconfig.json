@@ -12,7 +12,7 @@
     // Astro will directly run your TypeScript code, no transpilation needed.
     "noEmit": true,
     // Vite's client types
-    "types": ["astro/client"],
+    "types": ["node", "astro/client", "@astrojs/image/client"],
     // Enforce import type syntax
     "importsNotUsedAsValues": "error",
     "baseUrl": ".",

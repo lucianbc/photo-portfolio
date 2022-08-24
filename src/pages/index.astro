@@ -1,9 +1,19 @@
 ---
 // Welcome to Astro! Everything between these triple-dash code fences
 // is your "component front matter". It never runs in the browser.
+import { getIndexImages } from "src/domain/getIndexImages";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { Picture } from '@astrojs/image/components';
+import PhotoGrid from "@components/PhotoGrid.astro";
+
+const files = await getIndexImages();
 ---
 
 <BaseLayout>
+  <div class="container">    
+    <PhotoGrid photos={files}/>
+  </div>
   
 </BaseLayout>
+
+<!-- <Picture src={imageSource} sizes="" widths={[400, 800, 1200]} aspectRatio={"16:9"}/>    -->
