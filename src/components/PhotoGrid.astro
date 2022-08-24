@@ -3,7 +3,7 @@ import { Picture } from '@astrojs/image/components';
 
 export type Props = {
   photos: {
-    imagePath: string;
+    path: string;
     aspectRatio: number;
   }[];
 }
@@ -17,7 +17,7 @@ const col3 = photos.filter((_, index) => index % 3 === 2);
   <div class="flex flex-col gap-3">
     {col1.map((photo) => (
       <div class="image-item">
-        <Picture src={photo.imagePath} 
+        <Picture src={photo.path} 
           sizes="" 
           widths={[300]} 
           aspectRatio={photo.aspectRatio} />
@@ -27,7 +27,7 @@ const col3 = photos.filter((_, index) => index % 3 === 2);
   <div class="gallery-column">
     {col2.map((photo) => (
       <div class="image-item">
-        <Picture src={photo.imagePath} 
+        <Picture src={photo.path} 
           sizes="" 
           widths={[300]} 
           aspectRatio={photo.aspectRatio} />
@@ -37,7 +37,7 @@ const col3 = photos.filter((_, index) => index % 3 === 2);
   <div class="gallery-column">
     {col3.map((photo) => (
       <div class="relative cursor-pointer">
-        <Picture src={photo.imagePath} 
+        <Picture src={photo.path} 
           sizes="" 
           widths={[300]} 
           aspectRatio={photo.aspectRatio} />
