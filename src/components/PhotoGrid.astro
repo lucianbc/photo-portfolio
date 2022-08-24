@@ -1,11 +1,10 @@
 ---
 import { Picture } from '@astrojs/image/components';
+import type { Image } from '../domain/getIndexImages';
+import PhotoCol from './PhotoCol.astro';
 
 export type Props = {
-  photos: {
-    path: string;
-    aspectRatio: number;
-  }[];
+  photos: Image[];
 }
 
 const photos = (Astro.props as Props).photos;
@@ -13,35 +12,8 @@ const col1 = photos.filter((_, index) => index % 3 === 0);
 const col2 = photos.filter((_, index) => index % 3 === 1);
 const col3 = photos.filter((_, index) => index % 3 === 2);
 ---
-<div class="flex flex-row md:flex-col gap-3">
-  <div class="flex flex-col gap-3">
-    {col1.map((photo) => (
-      <div class="image-item">
-        <Picture src={photo.path} 
-          sizes="" 
-          widths={[300]} 
-          aspectRatio={photo.aspectRatio} />
-      </div>
-    ))}
-  </div>
-  <div class="gallery-column">
-    {col2.map((photo) => (
-      <div class="image-item">
-        <Picture src={photo.path} 
-          sizes="" 
-          widths={[300]} 
-          aspectRatio={photo.aspectRatio} />
-      </div>
-    ))}
-  </div>
-  <div class="gallery-column">
-    {col3.map((photo) => (
-      <div class="relative cursor-pointer">
-        <Picture src={photo.path} 
-          sizes="" 
-          widths={[300]} 
-          aspectRatio={photo.aspectRatio} />
-      </div>
-    ))}
-  </div>
+<div class="flex flex-col md:flex-row gap-3">
+  <PhotoCol col={col1} />
+  <PhotoCol col={col2} />
+  <PhotoCol col={col3} />
 </div>

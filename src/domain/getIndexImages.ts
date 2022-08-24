@@ -3,7 +3,7 @@ import * as is from "image-size";
 
 const BASE_PATH = "./public/photos/Index";
 
-type Image = {
+export type Image = {
   path: string;
   aspectRatio: number;
 };

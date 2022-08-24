@@ -1,0 +1,18 @@
+---
+import { Picture } from '@astrojs/image/components';
+import type { Image } from '../domain/getIndexImages';
+
+export type Props = {
+  col: Image[];
+}
+---
+<div class="flex flex-col gap-3 flex-grow">
+  {Astro.props.col.map((photo) => (
+    <div class="relative cursor-pointer">
+      <Picture src={photo.path} 
+        sizes="" 
+        widths={[700]}
+        aspectRatio={photo.aspectRatio} />
+    </div>
+  ))}
+</div>
