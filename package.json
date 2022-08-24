@@ -14,7 +14,8 @@
   },
   "dependencies": {
     "astro": "^1.0.7",
-    "googleapis": "^107.0.0"
+    "googleapis": "^107.0.0",
+    "image-size": "^1.0.2"
   },
   "devDependencies": {
     "@astrojs/tailwind": "^1.0.0",
