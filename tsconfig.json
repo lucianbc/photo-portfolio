@@ -2,13 +2,13 @@
   "compilerOptions": {
     // Enable top-level await and other modern ESM features.
     "target": "ESNext",
-    "module": "ESNext",
+    "module": "CommonJS",
     // Enable node-style module resolution, for things like npm package imports.
     "moduleResolution": "node",
     // Enable JSON imports.
     "resolveJsonModule": true,
-    // Enable stricter transpilation for better output.
-    "isolatedModules": true,
+    // Disable isolated modules for ease of running ts-node
+    "isolatedModules": false,
     // Astro will directly run your TypeScript code, no transpilation needed.
     "noEmit": true,
     // Vite's client types

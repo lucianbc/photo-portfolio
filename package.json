@@ -9,12 +9,16 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && tsc --noEmit && astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "ts-run": "ts-node"
   },
   "dependencies": {
-    "astro": "^1.0.7"
+    "astro": "^1.0.7",
+    "googleapis": "^107.0.0"
   },
   "devDependencies": {
-    "@astrojs/tailwind": "^1.0.0"
+    "@astrojs/tailwind": "^1.0.0",
+    "@types/node": "^18.7.13",
+    "ts-node": "^10.9.1"
   }
 }
