@@ -1,9 +1,14 @@
 ---
 // Welcome to Astro! Everything between these triple-dash code fences
 // is your "component front matter". It never runs in the browser.
+import PhotoGrid from "@components/PhotoGrid.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const photos = [];
 ---
 
 <BaseLayout>
-  
+  <div class="container">
+    <PhotoGrid photos={photos}/>
+  </div>
 </BaseLayout>

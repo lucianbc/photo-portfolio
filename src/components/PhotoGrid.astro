@@ -1,0 +1,47 @@
+---
+import { getRandomValues } from 'crypto';
+
+export type Props = {
+  photos: {
+    imagePath: string;
+    aspectRatio: string;
+  }[];
+}
+
+const photos = (Astro.props as Props).photos;
+const col1 = photos.filter((_, index) => index % 3 === 0);
+const col2 = photos.filter((_, index) => index % 3 === 1);
+const col3 = photos.filter((_, index) => index % 3 === 2);
+---
+<div class="flex flex-row md:flex-col gap-3">
+  <div class="flex flex-col gap-3">
+    {col1.map((photo) => (
+      <div class="image-item">
+        <div class="bg-black"></div>  
+      </div>
+    ))}
+  </div>
+  <div class="gallery-column">
+    {col2.map((photo) => (
+      <div class="image-item">
+        <div class="bg-red"></div>  
+      </div>
+    ))}
+  </div>
+  <div class="gallery-column">
+    {col1.map((photo) => (
+      <div class="image-item">
+        <div class="bg-white"></div>  
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+.image-item {
+  position: relative;
+  cursor: pointer;
+}
+
+
+</style>
