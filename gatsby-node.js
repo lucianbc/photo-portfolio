@@ -1,71 +1,86 @@
-const ExifImage = require("exif").ExifImage;
-const util = require("util");
-const sizeOf = require("image-size");
 const path = require("path");
+const luxon = require("luxon");
+const postTemplate = path.resolve(`./src/templates/Album.tsx`);
 
-async function onCreateNode({ node, actions: { createNodeField } }) {
-  if (node.internal.mediaType !== "image/jpeg") return;
+exports.createSchemaCustomization = ({ actions: { createTypes }, schema }) => {
+  createTypes(`
+    type Mdx implements Node {
+      frontmatter: MdxFrontmatter!
+    }
 
-  const x = await readExif(node.absolutePath);
-  const size = await util.promisify(sizeOf)(node.absolutePath);
+    type MdxFrontmatter {
+      banner: File @link(by: "name")
+      images: [File] @link(by: "relativeDirectory", from: "collection")
+    }
+  `);
+  const typeDef = [
+    schema.buildObjectType({
+      name: "MdxFrontmatter",
+      fields: {
+        date: {
+          type: "Date",
+          resolve: (source) =>
+            luxon.DateTime.fromFormat(source.date, "dd-MM-yyyy", {
+              zone: "UTC",
+            }).toJSDate(),
+          extensions: {
+            dateformat: {},
+          },
+        },
+      },
+    }),
+  ];
+  createTypes(typeDef);
+};
 
-  createNodeField({
-    name: "exif",
-    value: x,
-    node,
-  });
-  createNodeField({
-    name: "dimension",
-    value: {
-      ...size,
-      aspectRatio: size.width / size.height,
-    },
-    node,
-  });
-}
+exports.onCreateNode = async ({ node, actions: { createNodeField } }) => {
+  if (node.internal.type === 'Mdx') {
+    const pathMarker = "content";
+    const { contentFilePath } = node.internal;
+    const p = path.parse(contentFilePath.slice(contentFilePath.indexOf(pathMarker) + pathMarker.length)).dir;
 
-async function createPages({ graphql, actions }) {
+    createNodeField({
+      node,
+      name: 'slug',
+      value: p,
+    });
+  }
+};
+
+exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions;
-  const photoPageTemplate = path.resolve(`src/templates/photo.tsx`);
-  const photosQuery = `
-    query loadPhotosForPages {
-      allFile(filter: {
-        sourceInstanceName:{
-          eq: "photos"
-        }
-      }) {
+  const result = await graphql(`
+    query {
+      allMdx {
         nodes {
           id
+          internal {
+            contentFilePath
+          }
+          fields {
+            slug
+          }
         }
       }
-    }  
-  `;
-  const photos = await graphql(photosQuery).then((result) => {
-    if (result.errors) {
-      throw result.errors;
     }
-    return result.data.allFile.nodes;
-  });
-  photos.forEach((node) => {
+  `);
+  if (result.errors) {
+    reporter.panicOnBuild("Error loading MDX result", result.errors);
+  }
+  // Create blog post pages.
+  const posts = result.data.allMdx.nodes;
+  // you'll call `createPage` for each result
+  posts.forEach((node) => {
     createPage({
-      path: `/photos/${node.id}`,
-      component: photoPageTemplate,
-      context: {
-        photoId: node.id,
-      },
+      // As mentioned above you could also query something else like frontmatter.title above and use a helper function
+      // like slugify to create a slug
+      path: node.fields.slug,
+      // Provide the path to the MDX content file so webpack can pick it up and transform it into JSX
+      // component: node.internal.contentFilePath,
+      component: `${postTemplate}?__contentFilePath=${node.internal.contentFilePath}`,
+      // You can use the values in this context in
+      // our page layout component
+      context: { id: node.id },
     });
   });
-}
-
-const readExif = (path) =>
-  new Promise((resolve, reject) => {
-    new ExifImage({ image: path }, (err, data) => {
-      if (err) {
-        reject(err);
-      }
-      resolve(data);
-    });
-  });
-
-exports.onCreateNode = onCreateNode;
-exports.createPages = createPages;
+};
