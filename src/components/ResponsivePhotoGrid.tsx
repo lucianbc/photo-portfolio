@@ -1,16 +1,16 @@
 import React from "react";
 import layout from "justified-layout";
-import { getImage, GatsbyImage } from "gatsby-plugin-image";
 import styled from "styled-components";
-import { Link } from "gatsby";
+import { ImageWithPreview } from "./PhotoPreviewPortal";
 
 type Props = {
   photos: {
     name: string;
     id: string;
-    fields: {
-      dimension: {
-        aspectRatio: number;
+    childImageSharp: {
+      original: {
+        height: number;
+        width: number;
       };
     };
   }[];
@@ -45,7 +45,9 @@ const breakPoints = [
 ];
 
 export const PhotoGrid = ({ photos }: Props) => {
-  const ratios = photos.map((p) => p.fields.dimension.aspectRatio);
+  const ratios = photos.map(
+    (p) => p.childImageSharp.original.width / p.childImageSharp.original.height
+  );
 
   const layouts = breakPoints.map((breakPoint) => ({
     breakPoint,
@@ -75,13 +77,7 @@ export const PhotoGrid = ({ photos }: Props) => {
                   100,
               }))}
             >
-              <Link to={`/photos/${photo.id}`}>
-                <GatsbyImage
-                  image={getImage(photo as any)}
-                  alt={photo.name}
-                  style={{ height: "100%", width: "100%" }}
-                />
-              </Link>
+              <ImageWithPreview photo={photo} photoCollection={photos} />
             </PhotoBox>
           ))
         )}
@@ -112,15 +108,9 @@ const PhotoBox = styled.div<PhotoBoxProps>`
   display: inline-block;
   padding: 5px;
   box-sizing: border-box;
-  :hover {
-    opacity: 0.9;
-  }
   transition: all 0.2s;
 `;
 
 const GridContainer = styled.div`
-  width: 95%;
-  max-width: 2100px;
-  margin: auto;
-  box-sizing: border-box;
+  margin: -5px;
 `;

@@ -1,4 +1,5 @@
-node_modules/
-.cache/
+node_modules
+.cache
 public
+src/content/**/*.jpg
 .DS_Store
